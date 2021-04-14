@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_search"
+        android:icon="@drawable/ic_search"
+        android:title="검색" />
+
+    <item
+        android:id="@+id/menu_history"
+        android:icon="@drawable/ic_history"
+        android:title="최근검색" />
+
+    <item
+        android:id="@+id/menu_rank"
+        android:icon="@drawable/ic_rank"
+        android:title="랭킹" />
+
+</menu>
