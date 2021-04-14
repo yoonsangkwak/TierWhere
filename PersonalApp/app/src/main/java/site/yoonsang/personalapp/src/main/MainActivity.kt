@@ -1,21 +1,22 @@
-package site.yoonsang.personalapp
+package site.yoonsang.personalapp.src.main
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
+import site.yoonsang.personalapp.R
+import site.yoonsang.personalapp.config.BaseActivity
 import site.yoonsang.personalapp.databinding.ActivityMainBinding
+import site.yoonsang.personalapp.src.main.history.HistoryFragment
+import site.yoonsang.personalapp.src.main.rank.RankFragment
+import site.yoonsang.personalapp.src.main.search.SearchFragment
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::inflate) {
 
-    private lateinit var binding: ActivityMainBinding
     private val fragmentSearch by lazy { SearchFragment() }
     private val fragmentHistory by lazy { HistoryFragment() }
     private val fragmentRank by lazy { RankFragment() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
 
         binding.mainBottomNavigationView.selectedItemId = R.id.menu_search
         changeFragment(fragmentSearch)
