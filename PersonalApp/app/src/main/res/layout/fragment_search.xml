@@ -6,18 +6,32 @@
     android:layout_height="match_parent"
     tools:context=".src.main.search.SearchFragment">
 
-    <TextView
+    <LinearLayout
         android:id="@+id/search_logo_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/kotrabold"
-        android:text="티어가어디"
-        android:textColor="@color/black"
-        android:textSize="50sp"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@id/search_search_layout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/kotrabold"
+            android:text="티어"
+            android:textColor="@color/main_one"
+            android:textSize="50sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/kotrabold"
+            android:text="가어디?"
+            android:textColor="@color/black"
+            android:textSize="50sp" />
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/search_search_layout"
@@ -29,7 +43,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/search_logo_text">
-
 
         <EditText
             android:id="@+id/search_edit_text"
@@ -60,14 +73,14 @@
         android:src="@drawable/ic_star"
         app:layout_constraintBottom_toTopOf="@id/search_favorite_layout"
         app:layout_constraintStart_toStartOf="parent"
-        app:tint="@color/main_one" />
+        app:tint="@color/main_two" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
         android:text="즐겨찾기"
-        android:textColor="@color/main_one"
+        android:textColor="@color/main_two"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@id/search_favorite_layout"
         app:layout_constraintStart_toEndOf="@id/search_favorite_star" />
@@ -77,6 +90,7 @@
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:layout_margin="20dp"
+        android:visibility="invisible"
         android:background="@drawable/favorite_background"
         android:gravity="center"
         android:orientation="horizontal"
@@ -164,6 +178,37 @@
                     tools:text="50%" />
             </LinearLayout>
         </LinearLayout>
+
+        <ImageView
+            android:id="@+id/search_favorite_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:paddingTop="20dp"
+            android:src="@drawable/ic_close"
+            app:tint="@color/black" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/search_favorite_absent_layout"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_margin="20dp"
+        android:background="@drawable/favorite_background"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingHorizontal="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/search_search_layout">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="자주 검색하는 계정을 등록해보세요" />
 
     </LinearLayout>
 
