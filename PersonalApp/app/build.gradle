@@ -3,12 +3,16 @@ plugins {
     id 'kotlin-android'
 }
 
+def propertiesFile = rootProject.file("local.properties")
+def properties = new Properties()
+properties.load(new FileInputStream(propertiesFile))
+
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
 
-    viewBinding {
-        enabled = true
+    buildFeatures {
+        viewBinding = true
     }
 
     defaultConfig {
@@ -19,6 +23,8 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("String", "RIOT_API_KEY", properties['RIOT_API_KEY'])
     }
 
     buildTypes {
