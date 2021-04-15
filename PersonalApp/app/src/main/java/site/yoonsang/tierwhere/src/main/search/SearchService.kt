@@ -4,7 +4,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import site.yoonsang.tierwhere.config.ApplicationClass
-import site.yoonsang.tierwhere.src.main.search.model.GetSummonerResponse
+import site.yoonsang.tierwhere.src.main.search.model.Summoner
 
 class SearchService(val view: SearchView) {
 
@@ -12,15 +12,15 @@ class SearchService(val view: SearchView) {
         val searchRetrofitInterface =
             ApplicationClass.sRetrofit.create(SearchRetrofitInterface::class.java)
         searchRetrofitInterface.getSummoner(summonerName)
-            .enqueue(object : Callback<GetSummonerResponse> {
+            .enqueue(object : Callback<Summoner> {
                 override fun onResponse(
-                    call: Call<GetSummonerResponse>,
-                    response: Response<GetSummonerResponse>
+                    call: Call<Summoner>,
+                    response: Response<Summoner>
                 ) {
-                    view.getSummonerSuccess(response.body() as GetSummonerResponse)
+                    view.getSummonerSuccess(response.body() as Summoner)
                 }
 
-                override fun onFailure(call: Call<GetSummonerResponse>, t: Throwable) {
+                override fun onFailure(call: Call<Summoner>, t: Throwable) {
                     view.getSummonerFailure(t.message ?: "통신 오류")
                 }
             })

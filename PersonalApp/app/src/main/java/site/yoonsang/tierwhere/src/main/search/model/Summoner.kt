@@ -3,7 +3,7 @@ package site.yoonsang.tierwhere.src.main.search.model
 
 import com.google.gson.annotations.SerializedName
 
-data class GetSummonerResponse(
+data class Summoner(
     @SerializedName("accountId")
     val accountId: String,
     @SerializedName("id")

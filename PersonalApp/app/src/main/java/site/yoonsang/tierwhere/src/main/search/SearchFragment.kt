@@ -5,7 +5,7 @@ import android.view.View
 import site.yoonsang.tierwhere.R
 import site.yoonsang.tierwhere.config.BaseFragment
 import site.yoonsang.tierwhere.databinding.FragmentSearchBinding
-import site.yoonsang.tierwhere.src.main.search.model.GetSummonerResponse
+import site.yoonsang.tierwhere.src.main.search.model.Summoner
 
 class SearchFragment :
     BaseFragment<FragmentSearchBinding>(FragmentSearchBinding::bind, R.layout.fragment_search),
@@ -21,7 +21,7 @@ class SearchFragment :
         }
     }
 
-    override fun getSummonerSuccess(response: GetSummonerResponse) {
+    override fun getSummonerSuccess(response: Summoner) {
         dismissLoadingDialog()
         showCustomToast(response.summonerLevel.toString())
     }

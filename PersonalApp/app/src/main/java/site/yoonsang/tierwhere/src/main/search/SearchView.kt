@@ -1,10 +1,10 @@
 package site.yoonsang.tierwhere.src.main.search
 
-import site.yoonsang.tierwhere.src.main.search.model.GetSummonerResponse
+import site.yoonsang.tierwhere.src.main.search.model.Summoner
 
 interface SearchView {
 
-    fun getSummonerSuccess(response: GetSummonerResponse)
+    fun getSummonerSuccess(response: Summoner)
 
     fun getSummonerFailure(message: String)
 }
