@@ -1,13 +1,13 @@
-package site.yoonsang.personalapp.src.main
+package site.yoonsang.tierwhere.src.main
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import site.yoonsang.personalapp.R
-import site.yoonsang.personalapp.config.BaseActivity
-import site.yoonsang.personalapp.databinding.ActivityMainBinding
-import site.yoonsang.personalapp.src.main.history.HistoryFragment
-import site.yoonsang.personalapp.src.main.rank.RankFragment
-import site.yoonsang.personalapp.src.main.search.SearchFragment
+import site.yoonsang.tierwhere.R
+import site.yoonsang.tierwhere.config.BaseActivity
+import site.yoonsang.tierwhere.databinding.ActivityMainBinding
+import site.yoonsang.tierwhere.src.main.history.HistoryFragment
+import site.yoonsang.tierwhere.src.main.rank.RankFragment
+import site.yoonsang.tierwhere.src.main.search.SearchFragment
 
 class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::inflate) {
 

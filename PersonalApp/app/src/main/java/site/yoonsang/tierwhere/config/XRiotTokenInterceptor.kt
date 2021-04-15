@@ -1,9 +1,9 @@
-package site.yoonsang.personalapp.config
+package site.yoonsang.tierwhere.config
 
 import okhttp3.Interceptor
 import okhttp3.Request
 import okhttp3.Response
-import site.yoonsang.personalapp.BuildConfig
+import site.yoonsang.tierwhere.BuildConfig
 import java.io.IOException
 
 class XRiotTokenInterceptor : Interceptor {

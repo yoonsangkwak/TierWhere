@@ -1,10 +1,10 @@
-package site.yoonsang.personalapp.src.main.search
+package site.yoonsang.tierwhere.src.main.search
 
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import site.yoonsang.personalapp.config.ApplicationClass
-import site.yoonsang.personalapp.src.main.search.model.GetSummonerResponse
+import site.yoonsang.tierwhere.config.ApplicationClass
+import site.yoonsang.tierwhere.src.main.search.model.GetSummonerResponse
 
 class SearchService(val view: SearchView) {
 

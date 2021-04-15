@@ -1,12 +1,12 @@
-package site.yoonsang.personalapp.src.splash
+package site.yoonsang.tierwhere.src.splash
 
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import site.yoonsang.personalapp.config.BaseActivity
-import site.yoonsang.personalapp.databinding.ActivitySplashBinding
-import site.yoonsang.personalapp.src.main.MainActivity
+import site.yoonsang.tierwhere.config.BaseActivity
+import site.yoonsang.tierwhere.databinding.ActivitySplashBinding
+import site.yoonsang.tierwhere.src.main.MainActivity
 
 class SplashActivity : BaseActivity<ActivitySplashBinding>(ActivitySplashBinding::inflate) {
 

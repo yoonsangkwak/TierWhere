@@ -1,11 +1,11 @@
-package site.yoonsang.personalapp.src.main.search
+package site.yoonsang.tierwhere.src.main.search
 
 import android.os.Bundle
 import android.view.View
-import site.yoonsang.personalapp.R
-import site.yoonsang.personalapp.config.BaseFragment
-import site.yoonsang.personalapp.databinding.FragmentSearchBinding
-import site.yoonsang.personalapp.src.main.search.model.GetSummonerResponse
+import site.yoonsang.tierwhere.R
+import site.yoonsang.tierwhere.config.BaseFragment
+import site.yoonsang.tierwhere.databinding.FragmentSearchBinding
+import site.yoonsang.tierwhere.src.main.search.model.GetSummonerResponse
 
 class SearchFragment :
     BaseFragment<FragmentSearchBinding>(FragmentSearchBinding::bind, R.layout.fragment_search),

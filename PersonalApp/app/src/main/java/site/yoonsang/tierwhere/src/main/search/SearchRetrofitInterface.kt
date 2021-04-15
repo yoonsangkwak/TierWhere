@@ -1,10 +1,9 @@
-package site.yoonsang.personalapp.src.main.search
+package site.yoonsang.tierwhere.src.main.search
 
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
-import retrofit2.http.Query
-import site.yoonsang.personalapp.src.main.search.model.GetSummonerResponse
+import site.yoonsang.tierwhere.src.main.search.model.GetSummonerResponse
 
 interface SearchRetrofitInterface {
 

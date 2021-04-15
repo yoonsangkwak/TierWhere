@@ -1,4 +1,4 @@
-package site.yoonsang.personalapp.config
+package site.yoonsang.tierwhere.config
 
 import android.app.Application
 import android.content.SharedPreferences

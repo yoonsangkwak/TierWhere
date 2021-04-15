@@ -1,4 +1,4 @@
-package site.yoonsang.personalapp.src.main.search.model
+package site.yoonsang.tierwhere.src.main.search.model
 
 
 import com.google.gson.annotations.SerializedName

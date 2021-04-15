@@ -1,10 +1,10 @@
-package site.yoonsang.personalapp.src.main.history
+package site.yoonsang.tierwhere.src.main.history
 
 import android.os.Bundle
 import android.view.View
-import site.yoonsang.personalapp.R
-import site.yoonsang.personalapp.config.BaseFragment
-import site.yoonsang.personalapp.databinding.FragmentHistoryBinding
+import site.yoonsang.tierwhere.R
+import site.yoonsang.tierwhere.config.BaseFragment
+import site.yoonsang.tierwhere.databinding.FragmentHistoryBinding
 
 class HistoryFragment : BaseFragment<FragmentHistoryBinding>(FragmentHistoryBinding::bind, R.layout.fragment_history) {
 

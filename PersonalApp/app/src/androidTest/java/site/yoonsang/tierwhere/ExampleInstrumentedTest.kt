@@ -1,4 +1,4 @@
-package site.yoonsang.personalapp
+package site.yoonsang.tierwhere
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

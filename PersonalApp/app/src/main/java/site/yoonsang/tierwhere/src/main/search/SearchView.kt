@@ -1,6 +1,6 @@
-package site.yoonsang.personalapp.src.main.search
+package site.yoonsang.tierwhere.src.main.search
 
-import site.yoonsang.personalapp.src.main.search.model.GetSummonerResponse
+import site.yoonsang.tierwhere.src.main.search.model.GetSummonerResponse
 
 interface SearchView {
 

@@ -1,11 +1,11 @@
-package site.yoonsang.personalapp.util
+package site.yoonsang.tierwhere.util
 
 import android.app.Dialog
 import android.content.Context
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.Window
-import site.yoonsang.personalapp.databinding.DialogLoadingBinding
+import site.yoonsang.tierwhere.databinding.DialogLoadingBinding
 
 class LoadingDialog(context: Context): Dialog(context) {
     private lateinit var binding: DialogLoadingBinding

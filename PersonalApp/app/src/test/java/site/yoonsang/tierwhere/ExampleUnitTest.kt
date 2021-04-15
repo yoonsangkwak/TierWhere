@@ -1,4 +1,4 @@
-package site.yoonsang.personalapp
+package site.yoonsang.tierwhere
 
 import org.junit.Test
 
