@@ -17,7 +17,11 @@ class SearchService(val view: SearchView) {
                     call: Call<Summoner>,
                     response: Response<Summoner>
                 ) {
-                    view.getSummonerSuccess(response.body() as Summoner)
+                    if (response.code() == 200) {
+                        view.getSummonerSuccess(response.body() as Summoner)
+                    } else {
+                        view.getSummonerFailure("잘못된 요청입니다.")
+                    }
                 }
 
                 override fun onFailure(call: Call<Summoner>, t: Throwable) {
