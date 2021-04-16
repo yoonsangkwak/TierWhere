@@ -26,12 +26,12 @@ class SearchFragment :
 
     override fun getSummonerSuccess(response: Summoner) {
         dismissLoadingDialog()
-        showCustomToast(response.name)
         val intent = Intent(activity, ProfileActivity::class.java)
         intent.putExtra("id", response.id)
         intent.putExtra("name", response.name)
         intent.putExtra("date", response.revisionDate)
         intent.putExtra("level", response.summonerLevel)
+        intent.putExtra("icon", response.profileIconId)
         startActivity(intent)
     }
 

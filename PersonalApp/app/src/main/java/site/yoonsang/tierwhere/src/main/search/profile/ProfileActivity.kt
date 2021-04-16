@@ -17,11 +17,10 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding>(ActivityProfileBind
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        refreshData()
 
-        val encryptedSummonerId = intent.getStringExtra("id")
-        if (encryptedSummonerId != null) {
-            showLoadingDialog(this)
-            ProfileService(this).tryGetUserProfile(encryptedSummonerId)
+        binding.profileRefreshLayout.setOnClickListener {
+            refreshData()
         }
     }
 
@@ -34,6 +33,9 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding>(ActivityProfileBind
             Locale.KOREA
         ).format(intent.getLongExtra("date", 0))
         binding.profileRefreshDateText.text = sdf
+        Glide.with(binding.profileIconImage.context)
+            .load("http://ddragon.leagueoflegends.com/cdn/10.18.1/img/profileicon/${intent.getIntExtra("icon", 0)}.png")
+            .into(binding.profileIconImage)
 
         for (item in response) {
             when (item.queueType) {
@@ -79,5 +81,13 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding>(ActivityProfileBind
         Glide.with(imageView.context)
             .load(tierImage)
             .into(imageView)
+    }
+
+    private fun refreshData() {
+        val encryptedSummonerId = intent.getStringExtra("id")
+        if (encryptedSummonerId != null) {
+            showLoadingDialog(this)
+            ProfileService(this).tryGetUserProfile(encryptedSummonerId)
+        }
     }
 }
