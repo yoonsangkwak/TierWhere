@@ -11,18 +11,13 @@ interface ProfileRetrofitInterface {
 
     @GET("/lol/league/v4/entries/by-summoner/{encryptedSummonerId}")
     fun getUserProfile(
-        @Path("encryptedSummonerId") encryptedSummonerId: String
+        @Path("encryptedSummonerId") summonerId: String
     ): Call<SummonerLeague>
 
     @GET("/lol/match/v4/matchlists/by-account/{encryptedAccountId}")
     fun getMatchesInfo(
-        @Path("encryptedSummonerId") encryptedSummonerId: String,
-        @Query("champion") champion: Set<Int>? = null,
-        @Query("queue") queue: Set<Int>? = null,
-        @Query("season") season: Set<Int>? = null,
-        @Query("endTime") endTime: Long? = null,
-        @Query("beginTime") beginTime: Long? = null,
-        @Query("endIndex") endIndex: Int? = null,
-        @Query("beginIndex") beginIndex: Int? = null
+        @Path("encryptedAccountId") accountId: String,
+        @Query("endIndex") endIndex: Int?,
+        @Query("beginIndex") beginIndex: Int?
     ): Call<MatchList>
 }

@@ -27,7 +27,8 @@ class SearchFragment :
     override fun getSummonerSuccess(response: Summoner) {
         dismissLoadingDialog()
         val intent = Intent(activity, ProfileActivity::class.java)
-        intent.putExtra("id", response.id)
+        intent.putExtra("summonerId", response.id)
+        intent.putExtra("accountId", response.accountId)
         intent.putExtra("name", response.name)
         intent.putExtra("date", response.revisionDate)
         intent.putExtra("level", response.summonerLevel)

@@ -3,10 +3,13 @@ package site.yoonsang.tierwhere.src.main.search.profile
 import android.os.Bundle
 import android.util.Log
 import android.widget.ImageView
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import site.yoonsang.tierwhere.R
 import site.yoonsang.tierwhere.config.BaseActivity
 import site.yoonsang.tierwhere.databinding.ActivityProfileBinding
+import site.yoonsang.tierwhere.src.main.search.profile.current.CurrentMatchListAdapter
+import site.yoonsang.tierwhere.src.main.search.profile.model.MatchList
 import site.yoonsang.tierwhere.src.main.search.profile.model.SummonerLeague
 import java.text.SimpleDateFormat
 import java.util.*
@@ -34,7 +37,14 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding>(ActivityProfileBind
         ).format(intent.getLongExtra("date", 0))
         binding.profileRefreshDateText.text = sdf
         Glide.with(binding.profileIconImage.context)
-            .load("http://ddragon.leagueoflegends.com/cdn/10.18.1/img/profileicon/${intent.getIntExtra("icon", 0)}.png")
+            .load(
+                "http://ddragon.leagueoflegends.com/cdn/10.18.1/img/profileicon/${
+                    intent.getIntExtra(
+                        "icon",
+                        0
+                    )
+                }.png"
+            )
             .into(binding.profileIconImage)
 
         for (item in response) {
@@ -64,6 +74,18 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding>(ActivityProfileBind
         showCustomToast(message)
     }
 
+    override fun getMatchesInfoSuccess(response: MatchList) {
+        val currentMatchListAdapter = CurrentMatchListAdapter(this, response.matchListItems)
+        binding.profileRecordRecyclerView.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = currentMatchListAdapter
+        }
+    }
+
+    override fun getMatchesInfoFailure(message: String) {
+        showCustomToast(message)
+    }
+
     private fun setTierImage(imageView: ImageView, tier: String) {
         val tierImage = when (tier) {
             "IRON" -> R.drawable.iron
@@ -84,10 +106,18 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding>(ActivityProfileBind
     }
 
     private fun refreshData() {
-        val encryptedSummonerId = intent.getStringExtra("id")
-        if (encryptedSummonerId != null) {
+        val summonerId = intent.getStringExtra("summonerId")
+        if (summonerId != null) {
             showLoadingDialog(this)
-            ProfileService(this).tryGetUserProfile(encryptedSummonerId)
+            ProfileService(this).tryGetUserProfile(summonerId)
+            getMatch()
+        }
+    }
+
+    private fun getMatch() {
+        val accountId = intent.getStringExtra("accountId")
+        if (accountId != null) {
+            ProfileService(this).tryGetMatchList(accountId, 0, 10)
         }
     }
 }

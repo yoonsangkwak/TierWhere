@@ -9,9 +9,9 @@ import site.yoonsang.tierwhere.src.main.search.profile.model.SummonerLeague
 
 class ProfileService(val view: ProfileView) {
 
-    fun tryGetUserProfile(encryptedSummonerId: String) {
+    fun tryGetUserProfile(summonerId: String) {
         val profileRetrofitInterface = ApplicationClass.sRetrofit.create(ProfileRetrofitInterface::class.java)
-        profileRetrofitInterface.getUserProfile(encryptedSummonerId).enqueue(object : Callback<SummonerLeague> {
+        profileRetrofitInterface.getUserProfile(summonerId).enqueue(object : Callback<SummonerLeague> {
             override fun onResponse(
                 call: Call<SummonerLeague>,
                 response: Response<SummonerLeague>
@@ -25,9 +25,9 @@ class ProfileService(val view: ProfileView) {
         })
     }
 
-    fun tryGetMatchList(encryptedSummonerId: String) {
+    fun tryGetMatchList(accountId: String, beginIndex: Int?=null, endIndex: Int?=null) {
         val profileRetrofitInterface = ApplicationClass.sRetrofit.create(ProfileRetrofitInterface::class.java)
-        profileRetrofitInterface.getMatchesInfo(encryptedSummonerId).enqueue(object : Callback<MatchList> {
+        profileRetrofitInterface.getMatchesInfo(accountId, endIndex, beginIndex).enqueue(object : Callback<MatchList> {
             override fun onResponse(call: Call<MatchList>, response: Response<MatchList>) {
                 view.getMatchesInfoSuccess(response.body() as MatchList)
             }
