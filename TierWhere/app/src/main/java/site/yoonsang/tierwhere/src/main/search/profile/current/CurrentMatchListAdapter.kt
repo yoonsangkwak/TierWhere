@@ -1,19 +1,25 @@
 package site.yoonsang.tierwhere.src.main.search.profile.current
 
 import android.content.Context
+import android.content.res.AssetManager
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import org.json.JSONObject
 import site.yoonsang.tierwhere.R
 import site.yoonsang.tierwhere.databinding.ItemCurrentMatchBinding
 import site.yoonsang.tierwhere.src.main.search.profile.current.model.DetailMatchInfo
 import site.yoonsang.tierwhere.src.main.search.profile.model.MatchListItem
+import java.io.BufferedReader
+import java.io.InputStream
+import java.io.InputStreamReader
 
 class CurrentMatchListAdapter(
-    context: Context,
+    val context: Context,
     private val summonerName: String,
     private val data: List<MatchListItem>
 ) : RecyclerView.Adapter<CurrentMatchListAdapter.ViewHolder>(), DetailMatchInfoView {
@@ -84,15 +90,9 @@ class CurrentMatchListAdapter(
             holder.resultLayout.setBackgroundResource(R.color.lost)
             holder.result.text = "패"
         }
-        Glide.with(holder.itemView.context)
-            .load("https://ddragon.leagueoflegends.com/cdn/11.8.1/img/champion/${response.participants[participantId - 1].championId}.png")
-            .into(holder.champion)
-        Glide.with(holder.itemView.context)
-            .load("https://ddragon.leagueoflegends.com/cdn/11.8.1/img/spell/${response.participants[participantId - 1].spell1Id}.png")
-            .into(holder.spellD)
-        Glide.with(holder.itemView.context)
-            .load("https://ddragon.leagueoflegends.com/cdn/11.8.1/img/spell/${response.participants[participantId - 1].spell2Id}.png")
-            .into(holder.spellF)
+        setChampionImage(holder.champion, response.participants[participantId - 1].championId)
+        setSpellImage(holder.spellD, response.participants[participantId - 1].spell1Id)
+        setSpellImage(holder.spellF, response.participants[participantId - 1].spell2Id)
         Glide.with(holder.itemView.context)
             .load("https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/${response.participants[participantId - 1].stats.perkPrimaryStyle}.png")
             .into(holder.mainRune)
@@ -145,5 +145,49 @@ class CurrentMatchListAdapter(
                 .load("https://ddragon.leagueoflegends.com/cdn/11.8.1/img/item/${itemId}.png")
                 .into(imageView)
         }
+    }
+
+    private fun setSpellImage(imageView: ImageView, id: Int) {
+        val assetManager = context.resources.assets
+        val inputStream = assetManager.open("jsons/spell.json")
+        val isr = InputStreamReader(inputStream)
+        val reader = BufferedReader(isr)
+
+        val buffer = StringBuffer()
+        var line = reader.readLine()
+        while (line != null) {
+            buffer.append(line + "\n")
+            line = reader.readLine()
+        }
+        val jsonData = buffer.toString()
+
+        val jsonObject = JSONObject(jsonData)
+        val spellName = jsonObject.getString(id.toString())
+
+        Glide.with(imageView.context)
+            .load("http://ddragon.leagueoflegends.com/cdn/11.8.1/img/spell/${spellName}.png")
+            .into(imageView)
+    }
+
+    private fun setChampionImage(imageView: ImageView, id: Int) {
+        val assetManager = context.resources.assets
+        val inputStream = assetManager.open("jsons/champion.json")
+        val isr = InputStreamReader(inputStream)
+        val reader = BufferedReader(isr)
+
+        val buffer = StringBuffer()
+        var line = reader.readLine()
+        while (line != null) {
+            buffer.append(line + "\n")
+            line = reader.readLine()
+        }
+        val jsonData = buffer.toString()
+
+        val jsonObject = JSONObject(jsonData)
+        val championName = jsonObject.getString(id.toString())
+
+        Glide.with(imageView.context)
+            .load("http://ddragon.leagueoflegends.com/cdn/11.8.1/img/champion/${championName}.png")
+            .into(imageView)
     }
 }
