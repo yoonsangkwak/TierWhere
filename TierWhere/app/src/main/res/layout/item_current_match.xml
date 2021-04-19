@@ -167,7 +167,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="2dp"
                     android:textColor="@color/black"
-                    tools:text="/" />
+                    android:text="/" />
 
                 <TextView
                     android:id="@+id/match_death_text"
@@ -182,7 +182,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="2dp"
                     android:textColor="@color/black"
-                    tools:text="/" />
+                    android:text="/" />
 
                 <TextView
                     android:id="@+id/match_assist_text"
@@ -210,21 +210,21 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_margin="1dp"
-                    tools:src="@color/main_four" />
+                    android:src="#3E3E3E" />
 
                 <ImageView
                     android:id="@+id/match_item_two_image"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_margin="1dp"
-                    tools:src="@color/main_four" />
+                    android:src="#3E3E3E" />
 
                 <ImageView
                     android:id="@+id/match_item_three_image"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_margin="1dp"
-                    tools:src="@color/main_four" />
+                    android:src="#3E3E3E" />
 
             </LinearLayout>
 
@@ -238,21 +238,21 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_margin="1dp"
-                    tools:src="@color/main_four" />
+                    android:src="#3E3E3E" />
 
                 <ImageView
                     android:id="@+id/match_item_five_image"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_margin="1dp"
-                    tools:src="@color/main_four" />
+                    android:src="#3E3E3E" />
 
                 <ImageView
                     android:id="@+id/match_item_six_image"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_margin="1dp"
-                    tools:src="@color/main_four" />
+                    android:src="#3E3E3E" />
             </LinearLayout>
         </LinearLayout>
 
@@ -262,7 +262,7 @@
             android:layout_height="30dp"
             android:layout_margin="1dp"
             android:layout_gravity="center"
-            tools:src="@color/main_four" />
+            android:src="#3E3E3E" />
     </LinearLayout>
 
     <TextView

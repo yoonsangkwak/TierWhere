@@ -75,7 +75,7 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding>(ActivityProfileBind
     }
 
     override fun getMatchesInfoSuccess(response: MatchList) {
-        val currentMatchListAdapter = CurrentMatchListAdapter(this, response.matchListItems)
+        val currentMatchListAdapter = CurrentMatchListAdapter(this, intent.getStringExtra("name")!!, response.matchListItems)
         binding.profileRecordRecyclerView.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = currentMatchListAdapter
