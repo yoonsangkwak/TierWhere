@@ -7,11 +7,11 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="main_one">#E66155</color>
-    <color name="main_two">#FCBC56</color>
-    <color name="main_three">#B0C5F5</color>
-    <color name="main_four">#D066FF</color>
-    <color name="main_five">#F5F397</color>
+    <color name="lightGray">#969696</color>
+    <color name="main_one">#519D9E</color>
+    <color name="main_two">#58C9B9</color>
+    <color name="main_three">#9DC8C8</color>
+    <color name="main_four">#D1B6E1</color>
     <color name="win">#568DF6</color>
     <color name="lost">#FE5B5D</color>
     <color name="threePoint">#20C0A3</color>

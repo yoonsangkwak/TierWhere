@@ -17,11 +17,11 @@ class SearchFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.searchSearchButton.setOnClickListener {
-            showLoadingDialog(context!!)
-            val summonerName = binding.searchEditText.text.toString().toLowerCase(Locale.ROOT)
-            SearchService(this).tryGetSummoner(summonerName)
-        }
+//        binding.searchSearchButton.setOnClickListener {
+//            showLoadingDialog(context!!)
+//            val summonerName = binding.searchEditText.text.toString().toLowerCase(Locale.ROOT)
+//            SearchService(this).tryGetSummoner(summonerName)
+//        }
     }
 
     override fun getSummonerSuccess(response: Summoner) {
