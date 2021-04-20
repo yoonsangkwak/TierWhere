@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import de.hdodenhof.circleimageview.CircleImageView
 import org.json.JSONObject
 import site.yoonsang.tierwhere.R
 import site.yoonsang.tierwhere.databinding.ItemCurrentMatchBinding
@@ -70,7 +71,7 @@ class CurrentMatchListAdapter(
         holder.matchSort.text = when (response.queueId) {
             420 -> "솔로 랭크"
             440 -> "자유 랭크"
-            450 -> "칼바람 나락"
+            450 -> "무작위 총력전"
             900 -> "URF"
             1020 -> "단일 모드"
             else -> "사용자 설정 게임"
@@ -93,12 +94,8 @@ class CurrentMatchListAdapter(
         setChampionImage(holder.champion, response.participants[participantId - 1].championId)
         setSpellImage(holder.spellD, response.participants[participantId - 1].spell1Id)
         setSpellImage(holder.spellF, response.participants[participantId - 1].spell2Id)
-        Glide.with(holder.itemView.context)
-            .load("https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/${response.participants[participantId - 1].stats.perkPrimaryStyle}.png")
-            .into(holder.mainRune)
-        Glide.with(holder.itemView.context)
-            .load("https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/${response.participants[participantId - 1].stats.perkSubStyle}.png")
-            .into(holder.subRune)
+        setRuneImage(holder.mainRune, response.participants[participantId - 1].stats.perk0)
+        setRuneImage(holder.subRune, response.participants[participantId - 1].stats.perkSubStyle)
         val kill = response.participants[participantId - 1].stats.kills
         val death = response.participants[participantId - 1].stats.deaths
         val assist = response.participants[participantId - 1].stats.assists
@@ -111,7 +108,7 @@ class CurrentMatchListAdapter(
         } else if (kill != 0 && assist != 0) {
             kda = "Perfect"
         }
-        holder.kdaRate.text = "$kda 평점"
+        holder.kdaRate.text = kda
         setItemImage(holder.itemOne, response.participants[participantId - 1].stats.item0)
         setItemImage(holder.itemTwo, response.participants[participantId - 1].stats.item1)
         setItemImage(holder.itemThree, response.participants[participantId - 1].stats.item2)
@@ -188,6 +185,28 @@ class CurrentMatchListAdapter(
 
         Glide.with(imageView.context)
             .load("http://ddragon.leagueoflegends.com/cdn/11.8.1/img/champion/${championName}.png")
+            .into(imageView)
+    }
+
+    private fun setRuneImage(imageView: CircleImageView, id: Int) {
+        val assetManager = context.resources.assets
+        val inputStream = assetManager.open("jsons/rune.json")
+        val isr = InputStreamReader(inputStream)
+        val reader = BufferedReader(isr)
+
+        val buffer = StringBuffer()
+        var line = reader.readLine()
+        while (line != null) {
+            buffer.append(line + "\n")
+            line = reader.readLine()
+        }
+        val jsonData = buffer.toString()
+
+        val jsonObject = JSONObject(jsonData)
+        val runeIcon = jsonObject.getString(id.toString())
+
+        Glide.with(imageView.context)
+            .load("https://ddragon.leagueoflegends.com/cdn/img/${runeIcon}")
             .into(imageView)
     }
 }

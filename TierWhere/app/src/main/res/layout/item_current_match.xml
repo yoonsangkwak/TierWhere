@@ -25,7 +25,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="10dp"
+            android:layout_marginHorizontal="5dp"
             android:text="·"
             android:textStyle="bold" />
 
@@ -125,12 +125,16 @@
                 android:id="@+id/match_rune_main"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
+                android:layout_gravity="center"
+                android:background="@drawable/rune_background"
                 tools:src="@color/main_two" />
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/match_rune_sub"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
+                android:padding="4dp"
+                android:layout_gravity="center"
                 tools:src="@color/main_four" />
         </LinearLayout>
 
