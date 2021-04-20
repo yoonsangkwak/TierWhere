@@ -18,4 +18,13 @@
     <color name="fourPoint">#31A5F6</color>
     <color name="fivePoint">#FF880A</color>
     <color name="multiKill">#FA5C5B</color>
+    <color name="iron">#3B4044</color>
+    <color name="bronze">#B5A68B</color>
+    <color name="silver">#9FA9AF</color>
+    <color name="gold">#FFB104</color>
+    <color name="platinum">#03B896</color>
+    <color name="diamond">#19A3FF</color>
+    <color name="master">#B635C9</color>
+    <color name="grandmaster">#FF4635</color>
+    <color name="challenger">#F7BE65</color>
 </resources>

@@ -3,6 +3,7 @@ package site.yoonsang.tierwhere.src.main.search.profile
 import android.os.Bundle
 import android.util.Log
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import site.yoonsang.tierwhere.R
@@ -55,7 +56,7 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding>(ActivityProfileBind
                     val winRate = (item.wins / (item.wins + item.losses).toFloat() * 100).toInt()
                     binding.profileSoloRankWinRateText.text =
                         "${item.wins}승 ${item.losses}패 (${winRate}%)"
-                    setTierImage(binding.profileSoloRankTierImage, item.tier)
+                    setTier(binding.profileSoloRankTierImage, binding.profileSoloRankTierText, item.tier)
                 }
                 "RANKED_FLEX_SR" -> {
                     binding.profileFlexRankTierText.text = "${item.tier} ${item.rank}"
@@ -63,7 +64,7 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding>(ActivityProfileBind
                     val winRate = (item.wins / (item.wins + item.losses).toFloat() * 100).toInt()
                     binding.profileFlexRankWinRateText.text =
                         "${item.wins}승 ${item.losses}패 (${winRate}%)"
-                    setTierImage(binding.profileFlexRankTierImage, item.tier)
+                    setTier(binding.profileFlexRankTierImage, binding.profileFlexRankTierText, item.tier)
                 }
             }
         }
@@ -86,23 +87,55 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding>(ActivityProfileBind
         showCustomToast(message)
     }
 
-    private fun setTierImage(imageView: ImageView, tier: String) {
-        val tierImage = when (tier) {
-            "IRON" -> R.drawable.iron
-            "BRONZE" -> R.drawable.bronze
-            "SILVER" -> R.drawable.silver
-            "GOLD" -> R.drawable.gold
-            "PLATINUM" -> R.drawable.platinum
-            "DIAMOND" -> R.drawable.diamond
-            "MASTER" -> R.drawable.master
-            "GRANDMASTER" -> R.drawable.grandmaster
-            "CHALLENGER" -> R.drawable.challenger
-            else -> R.drawable.unranked
+    private fun setTier(imageView: ImageView, textView: TextView, tier: String) {
+        val tierImage: Int
+        val tierColor: Int
+        when (tier) {
+            "IRON" -> {
+                tierImage = R.drawable.iron
+                tierColor = R.color.iron
+            }
+            "BRONZE" -> {
+                tierImage = R.drawable.bronze
+                tierColor = R.color.bronze
+            }
+            "SILVER" -> {
+                tierImage = R.drawable.silver
+                tierColor = R.color.silver
+            }
+            "GOLD" -> {
+                tierImage = R.drawable.gold
+                tierColor = R.color.gold
+            }
+            "PLATINUM" -> {
+                tierImage = R.drawable.platinum
+                tierColor = R.color.platinum
+            }
+            "DIAMOND" -> {
+                tierImage = R.drawable.diamond
+                tierColor = R.color.diamond
+            }
+            "MASTER" -> {
+                tierImage = R.drawable.master
+                tierColor = R.color.master
+            }
+            "GRANDMASTER" -> {
+                tierImage = R.drawable.grandmaster
+                tierColor = R.color.grandmaster
+            }
+            "CHALLENGER" -> {
+                tierImage = R.drawable.challenger
+                tierColor = R.color.challenger
+            }
+            else -> {
+                tierImage = R.drawable.unranked
+                tierColor = R.color.black
+            }
         }
-
         Glide.with(imageView.context)
             .load(tierImage)
             .into(imageView)
+        textView.setTextColor(getColor(tierColor))
     }
 
     private fun refreshData() {
