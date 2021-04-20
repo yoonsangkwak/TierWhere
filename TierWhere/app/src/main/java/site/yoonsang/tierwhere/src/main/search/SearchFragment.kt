@@ -6,6 +6,7 @@ import android.view.View
 import site.yoonsang.tierwhere.R
 import site.yoonsang.tierwhere.config.BaseFragment
 import site.yoonsang.tierwhere.databinding.FragmentSearchBinding
+import site.yoonsang.tierwhere.src.main.history.HistoryActivity
 import site.yoonsang.tierwhere.src.main.search.model.Summoner
 import site.yoonsang.tierwhere.src.main.search.profile.ProfileActivity
 import java.util.*
@@ -17,11 +18,9 @@ class SearchFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        binding.searchSearchButton.setOnClickListener {
-//            showLoadingDialog(context!!)
-//            val summonerName = binding.searchEditText.text.toString().toLowerCase(Locale.ROOT)
-//            SearchService(this).tryGetSummoner(summonerName)
-//        }
+        binding.searchSearchLayout.setOnClickListener {
+            startActivity(Intent(activity, HistoryActivity::class.java))
+        }
     }
 
     override fun getSummonerSuccess(response: Summoner) {

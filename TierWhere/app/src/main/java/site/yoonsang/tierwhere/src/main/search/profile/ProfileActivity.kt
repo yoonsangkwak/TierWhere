@@ -8,6 +8,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import site.yoonsang.tierwhere.R
 import site.yoonsang.tierwhere.config.BaseActivity
+import site.yoonsang.tierwhere.data.DBHelper
+import site.yoonsang.tierwhere.data.DB_NAME
+import site.yoonsang.tierwhere.data.DB_VERSION
+import site.yoonsang.tierwhere.data.HistorySummoner
 import site.yoonsang.tierwhere.databinding.ActivityProfileBinding
 import site.yoonsang.tierwhere.src.main.search.profile.current.CurrentMatchListAdapter
 import site.yoonsang.tierwhere.src.main.search.profile.model.MatchList
@@ -38,35 +42,65 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding>(ActivityProfileBind
         ).format(intent.getLongExtra("date", 0))
         binding.profileRefreshDateText.text = sdf
         Glide.with(binding.profileIconImage.context)
-            .load(
-                "http://ddragon.leagueoflegends.com/cdn/10.18.1/img/profileicon/${
-                    intent.getIntExtra(
-                        "icon",
-                        0
-                    )
-                }.png"
-            )
+            .load("http://ddragon.leagueoflegends.com/cdn/10.18.1/img/profileicon/${intent.getIntExtra("icon",0)}.png")
             .into(binding.profileIconImage)
 
         for (item in response) {
             when (item.queueType) {
                 "RANKED_SOLO_5x5" -> {
-                    binding.profileSoloRankTierText.text = "${item.tier} ${item.rank}"
+                    when (item.tier) {
+                        "MASTER",
+                        "GRANDMASTER",
+                        "CHALLERNGER" -> binding.profileSoloRankTierText.text = item.tier
+                        else -> binding.profileSoloRankTierText.text = "${item.tier} ${convertRank(item.rank)}"
+                    }
                     binding.profileSoloRankLpText.text = "${item.leaguePoints} LP"
                     val winRate = (item.wins / (item.wins + item.losses).toFloat() * 100).toInt()
                     binding.profileSoloRankWinRateText.text =
                         "${item.wins}승 ${item.losses}패 (${winRate}%)"
-                    setTier(binding.profileSoloRankTierImage, binding.profileSoloRankTierText, item.tier)
+                    setTier(
+                        binding.profileSoloRankTierImage,
+                        binding.profileSoloRankTierText,
+                        item.tier
+                    )
                 }
                 "RANKED_FLEX_SR" -> {
-                    binding.profileFlexRankTierText.text = "${item.tier} ${item.rank}"
+                    when (item.tier) {
+                        "MASTER",
+                        "GRANDMASTER",
+                        "CHALLERNGER" -> binding.profileFlexRankTierText.text = item.tier
+                        else -> binding.profileFlexRankTierText.text = "${item.tier} ${convertRank(item.rank)}"
+                    }
                     binding.profileFlexRankLpText.text = "${item.leaguePoints} LP"
                     val winRate = (item.wins / (item.wins + item.losses).toFloat() * 100).toInt()
                     binding.profileFlexRankWinRateText.text =
                         "${item.wins}승 ${item.losses}패 (${winRate}%)"
-                    setTier(binding.profileFlexRankTierImage, binding.profileFlexRankTierText, item.tier)
+                    setTier(
+                        binding.profileFlexRankTierImage,
+                        binding.profileFlexRankTierText,
+                        item.tier
+                    )
                 }
             }
+        }
+
+        val dbHelper = DBHelper(this, DB_NAME, DB_VERSION)
+        val summonerId = intent.getStringExtra("summonerId")!!
+        val name = intent.getStringExtra("name")!!
+        var tier = "UNRANKED"
+        var rank= ""
+        for (item in response) {
+            if (item.queueType == "RANKED_SOLO_5x5") {
+                tier = item.tier
+                rank = convertRank(item.rank)
+            }
+        }
+        val profileIcon = intent.getIntExtra("icon", 0)
+        val historySummoner = HistorySummoner(summonerId, name, tier, rank, profileIcon)
+        if (dbHelper.searchHistorySummoner(intent.getStringExtra("summonerId")!!) != null) {
+            dbHelper.updateHistorySummoner(historySummoner)
+        } else {
+            dbHelper.insertHistorySummoner(historySummoner)
         }
     }
 
@@ -76,7 +110,8 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding>(ActivityProfileBind
     }
 
     override fun getMatchesInfoSuccess(response: MatchList) {
-        val currentMatchListAdapter = CurrentMatchListAdapter(this, intent.getStringExtra("name")!!, response.matchListItems)
+        val currentMatchListAdapter =
+            CurrentMatchListAdapter(this, intent.getStringExtra("name")!!, response.matchListItems)
         binding.profileRecordRecyclerView.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = currentMatchListAdapter
@@ -136,6 +171,16 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding>(ActivityProfileBind
             .load(tierImage)
             .into(imageView)
         textView.setTextColor(getColor(tierColor))
+    }
+
+    private fun convertRank(rank: String): String {
+        return when (rank) {
+            "I" -> "1"
+            "II" -> "2"
+            "III" -> "3"
+            "IV" -> "4"
+            else -> ""
+        }
     }
 
     private fun refreshData() {
