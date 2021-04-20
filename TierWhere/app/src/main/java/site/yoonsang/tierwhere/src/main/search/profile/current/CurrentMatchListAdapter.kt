@@ -2,11 +2,13 @@ package site.yoonsang.tierwhere.src.main.search.profile.current
 
 import android.content.Context
 import android.content.res.AssetManager
+import android.graphics.Color
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import de.hdodenhof.circleimageview.CircleImageView
@@ -44,6 +46,7 @@ class CurrentMatchListAdapter(
         val kill = binding.matchKillText
         val death = binding.matchDeathText
         val assist = binding.matchAssistText
+        val multiKill = binding.matchMultiKillText
         val itemOne = binding.matchItemOneImage
         val itemTwo = binding.matchItemTwoImage
         val itemThree = binding.matchItemThreeImage
@@ -70,6 +73,7 @@ class CurrentMatchListAdapter(
     ) {
         holder.matchSort.text = when (response.queueId) {
             420 -> "솔로 랭크"
+            430 -> "일반"
             440 -> "자유 랭크"
             450 -> "무작위 총력전"
             900 -> "URF"
@@ -105,10 +109,14 @@ class CurrentMatchListAdapter(
         var kda = "0.00"
         if (death != 0) {
             kda = "%.2f".format((kill.toDouble() + assist.toDouble()) / death.toDouble())
+            setKDAColor(holder.kdaRate, ((kill.toDouble() + assist.toDouble()) / death.toDouble()))
         } else if (kill != 0 && assist != 0) {
             kda = "Perfect"
+            setKDAColor(holder.kdaRate, 5.0)
         }
         holder.kdaRate.text = kda
+        val multiKill = response.participants[participantId - 1].stats.largestMultiKill
+        setMultiKill(holder.multiKill, multiKill)
         setItemImage(holder.itemOne, response.participants[participantId - 1].stats.item0)
         setItemImage(holder.itemTwo, response.participants[participantId - 1].stats.item1)
         setItemImage(holder.itemThree, response.participants[participantId - 1].stats.item2)
@@ -208,5 +216,37 @@ class CurrentMatchListAdapter(
         Glide.with(imageView.context)
             .load("https://ddragon.leagueoflegends.com/cdn/img/${runeIcon}")
             .into(imageView)
+    }
+
+    private fun setKDAColor(textView: TextView, kda: Double) {
+        if (kda >= 3 && kda < 4) {
+            textView.setTextColor(context.getColor(R.color.threePoint))
+        } else if (kda >= 4 && kda < 5) {
+            textView.setTextColor(context.getColor(R.color.fourPoint))
+        } else if (kda >= 5) {
+            textView.setTextColor(context.getColor(R.color.fivePoint))
+        }
+    }
+
+    private fun setMultiKill(textView: TextView, multiKill: Int) {
+        when (multiKill) {
+            2 -> {
+                textView.text = "더블킬"
+                textView.visibility = View.VISIBLE
+            }
+            3 -> {
+                textView.text = "트리플킬"
+                textView.visibility = View.VISIBLE
+            }
+            4 -> {
+                textView.text = "쿼드라킬"
+                textView.visibility = View.VISIBLE
+            }
+            5 -> {
+                textView.text = "펜타킬"
+                textView.visibility = View.VISIBLE
+            }
+            else -> textView.visibility = View.GONE
+        }
     }
 }

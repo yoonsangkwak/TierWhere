@@ -14,4 +14,8 @@
     <color name="main_five">#F5F397</color>
     <color name="win">#568DF6</color>
     <color name="lost">#FE5B5D</color>
+    <color name="threePoint">#20C0A3</color>
+    <color name="fourPoint">#31A5F6</color>
+    <color name="fivePoint">#FF880A</color>
+    <color name="multiKill">#FA5C5B</color>
 </resources>
