@@ -127,6 +127,8 @@ class CurrentMatchListAdapter(
         setItemImage(holder.itemSix, response.participants[participantId - 1].stats.item5)
         Glide.with(holder.wad.context)
             .load("https://ddragon.leagueoflegends.com/cdn/11.8.1/img/item/${response.participants[participantId - 1].stats.item6}.png")
+            .placeholder(R.color.iron)
+            .error(R.color.iron)
             .into(holder.wad)
     }
 
@@ -151,6 +153,8 @@ class CurrentMatchListAdapter(
         if (itemId != 0) {
             Glide.with(imageView.context)
                 .load("https://ddragon.leagueoflegends.com/cdn/11.8.1/img/item/${itemId}.png")
+                .placeholder(R.color.iron)
+                .error(R.color.iron)
                 .into(imageView)
         }
     }
@@ -174,6 +178,8 @@ class CurrentMatchListAdapter(
 
         Glide.with(imageView.context)
             .load("http://ddragon.leagueoflegends.com/cdn/11.8.1/img/spell/${spellName}.png")
+            .placeholder(R.color.iron)
+            .error(R.color.iron)
             .into(imageView)
     }
 
@@ -196,6 +202,8 @@ class CurrentMatchListAdapter(
 
         Glide.with(imageView.context)
             .load("http://ddragon.leagueoflegends.com/cdn/11.8.1/img/champion/${championName}.png")
+            .placeholder(R.color.iron)
+            .error(R.color.iron)
             .into(imageView)
     }
 
@@ -218,6 +226,8 @@ class CurrentMatchListAdapter(
 
         Glide.with(imageView.context)
             .load("https://ddragon.leagueoflegends.com/cdn/img/${runeIcon}")
+            .placeholder(R.color.iron)
+            .error(R.color.iron)
             .into(imageView)
     }
 

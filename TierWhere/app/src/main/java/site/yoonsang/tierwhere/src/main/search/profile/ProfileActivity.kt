@@ -42,8 +42,9 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding>(ActivityProfileBind
         binding.profileSummonerNameText.text = intent.getStringExtra("name")
         binding.profileSummonerLevelText.text = intent.getIntExtra("level", 0).toString()
         Glide.with(binding.profileIconImage.context)
-            .load("http://ddragon.leagueoflegends.com/cdn/10.18.1/img/profileicon/${intent.getIntExtra("icon",0)}.png")
+            .load("http://ddragon.leagueoflegends.com/cdn/11.8.1/img/profileicon/${intent.getIntExtra("icon",0)}.png")
             .placeholder(R.color.iron)
+            .error(R.color.iron)
             .into(binding.profileIconImage)
 
         for (item in response) {
@@ -171,6 +172,8 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding>(ActivityProfileBind
         }
         Glide.with(imageView.context)
             .load(tierImage)
+            .placeholder(R.color.iron)
+            .error(R.color.iron)
             .into(imageView)
         textView.setTextColor(getColor(tierColor))
     }
