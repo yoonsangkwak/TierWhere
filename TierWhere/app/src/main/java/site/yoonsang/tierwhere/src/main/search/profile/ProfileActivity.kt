@@ -43,6 +43,7 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding>(ActivityProfileBind
         binding.profileSummonerLevelText.text = intent.getIntExtra("level", 0).toString()
         Glide.with(binding.profileIconImage.context)
             .load("http://ddragon.leagueoflegends.com/cdn/10.18.1/img/profileicon/${intent.getIntExtra("icon",0)}.png")
+            .placeholder(R.color.iron)
             .into(binding.profileIconImage)
 
         for (item in response) {

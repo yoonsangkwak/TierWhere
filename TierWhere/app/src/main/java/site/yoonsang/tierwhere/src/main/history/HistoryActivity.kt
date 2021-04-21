@@ -18,6 +18,8 @@ import java.util.*
 class HistoryActivity : BaseActivity<ActivityHistoryBinding>(ActivityHistoryBinding::inflate),
     HistoryView {
 
+    private lateinit var historySummonerAdapter: HistorySummonerAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -26,7 +28,8 @@ class HistoryActivity : BaseActivity<ActivityHistoryBinding>(ActivityHistoryBind
         imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY)
 
         val dbHelper = DBHelper(this, DB_NAME, DB_VERSION)
-        val historySummonerAdapter = HistorySummonerAdapter(this, dbHelper.selectHistorySummoner())
+        historySummonerAdapter = HistorySummonerAdapter(this, dbHelper)
+//        historySummonerAdapter = HistorySummonerAdapter(this, dbHelper.selectHistorySummoner())
         binding.historyRecyclerView.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = historySummonerAdapter
@@ -42,11 +45,6 @@ class HistoryActivity : BaseActivity<ActivityHistoryBinding>(ActivityHistoryBind
         binding.historyCloseImage.setOnClickListener {
             binding.historyEditText.setText("")
         }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        binding.historyRecyclerView.adapter!!.notifyDataSetChanged()
     }
 
     override fun getSummonerSuccess(response: Summoner) {
