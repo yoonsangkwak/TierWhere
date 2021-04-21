@@ -1,9 +1,8 @@
 package site.yoonsang.tierwhere.src.main.search.model
 
-
 import com.google.gson.annotations.SerializedName
 
-data class Summoner(
+data class SearchSummoner(
     @SerializedName("accountId")
     val accountId: String,
     @SerializedName("id")

@@ -172,8 +172,6 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding>(ActivityProfileBind
         }
         Glide.with(imageView.context)
             .load(tierImage)
-            .placeholder(R.color.iron)
-            .error(R.color.iron)
             .into(imageView)
         textView.setTextColor(getColor(tierColor))
     }

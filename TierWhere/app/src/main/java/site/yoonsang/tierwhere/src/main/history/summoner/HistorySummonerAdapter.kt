@@ -9,9 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import site.yoonsang.tierwhere.R
 import site.yoonsang.tierwhere.data.DBHelper
-import site.yoonsang.tierwhere.data.DB_NAME
-import site.yoonsang.tierwhere.data.DB_VERSION
-import site.yoonsang.tierwhere.data.HistorySummoner
 import site.yoonsang.tierwhere.databinding.ItemHistorySummonerBinding
 import site.yoonsang.tierwhere.src.main.history.HistoryActivity
 import site.yoonsang.tierwhere.src.main.history.summoner.model.Summoner

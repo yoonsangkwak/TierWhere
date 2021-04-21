@@ -1,8 +1,8 @@
-package site.yoonsang.tierwhere.src.main.history.model
+package site.yoonsang.tierwhere.src.main.search.favorite.model
 
 import com.google.gson.annotations.SerializedName
 
-data class Summoner(
+data class FavoriteSummoner(
     @SerializedName("accountId")
     val accountId: String,
     @SerializedName("id")

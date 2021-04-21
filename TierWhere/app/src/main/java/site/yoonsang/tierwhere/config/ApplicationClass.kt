@@ -21,6 +21,9 @@ class ApplicationClass: Application() {
 
         // Riot Token Header 키 값
         val X_RIOT_TOKEN = "X-Riot-Token"
+
+        // 즐겨찾기
+        val FAVORITE = "favorite"
     }
 
     override fun onCreate() {

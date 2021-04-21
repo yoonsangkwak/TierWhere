@@ -10,7 +10,7 @@ import site.yoonsang.tierwhere.data.DBHelper
 import site.yoonsang.tierwhere.data.DB_NAME
 import site.yoonsang.tierwhere.data.DB_VERSION
 import site.yoonsang.tierwhere.databinding.ActivityHistoryBinding
-import site.yoonsang.tierwhere.src.main.history.model.Summoner
+import site.yoonsang.tierwhere.src.main.history.model.HistorySummoner
 import site.yoonsang.tierwhere.src.main.history.summoner.HistorySummonerAdapter
 import site.yoonsang.tierwhere.src.main.search.profile.ProfileActivity
 import java.util.*
@@ -29,7 +29,6 @@ class HistoryActivity : BaseActivity<ActivityHistoryBinding>(ActivityHistoryBind
 
         val dbHelper = DBHelper(this, DB_NAME, DB_VERSION)
         historySummonerAdapter = HistorySummonerAdapter(this, dbHelper)
-//        historySummonerAdapter = HistorySummonerAdapter(this, dbHelper.selectHistorySummoner())
         binding.historyRecyclerView.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = historySummonerAdapter
@@ -47,7 +46,7 @@ class HistoryActivity : BaseActivity<ActivityHistoryBinding>(ActivityHistoryBind
         }
     }
 
-    override fun getSummonerSuccess(response: Summoner) {
+    override fun getSummonerSuccess(response: HistorySummoner) {
         dismissLoadingDialog()
         val intent = Intent(this, ProfileActivity::class.java)
         intent.putExtra("summonerId", response.id)
