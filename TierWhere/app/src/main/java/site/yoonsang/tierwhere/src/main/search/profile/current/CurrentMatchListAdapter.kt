@@ -15,6 +15,8 @@ import de.hdodenhof.circleimageview.CircleImageView
 import org.json.JSONObject
 import site.yoonsang.tierwhere.R
 import site.yoonsang.tierwhere.databinding.ItemCurrentMatchBinding
+import site.yoonsang.tierwhere.src.main.search.profile.ProfileActivity
+import site.yoonsang.tierwhere.src.main.search.profile.ProfileService
 import site.yoonsang.tierwhere.src.main.search.profile.current.model.DetailMatchInfo
 import site.yoonsang.tierwhere.src.main.search.profile.model.MatchListItem
 import java.io.BufferedReader
@@ -129,6 +131,7 @@ class CurrentMatchListAdapter(
     }
 
     override fun getDetailMatchInfoFailure(message: String) {
+        (context as ProfileActivity).showCustomToast(message)
     }
 
     private fun calculateDate(gameDate: Long): String {

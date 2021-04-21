@@ -10,8 +10,8 @@
         android:id="@+id/history_search_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp"
         android:orientation="horizontal"
+        android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -27,12 +27,12 @@
             android:id="@+id/history_edit_text"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/edit_background"
-            android:padding="8dp"
-            android:layout_marginHorizontal="10dp"
             android:layout_gravity="center"
+            android:layout_marginHorizontal="10dp"
             android:layout_weight="1"
-            android:hint="소환사 검색" />
+            android:background="@drawable/edit_background"
+            android:hint="소환사 검색"
+            android:padding="8dp" />
 
         <ImageView
             android:id="@+id/history_search_image"
@@ -42,50 +42,29 @@
             android:src="@drawable/ic_search" />
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/history_info_layout"
+    <TextView
+        android:id="@+id/history_current_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginVertical="10dp"
         android:padding="10dp"
-        app:layout_constraintTop_toBottomOf="@id/history_search_layout"
-        app:layout_constraintStart_toStartOf="parent"
+        android:text="최근 검색"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            android:textSize="24sp"
-            android:text="최근 검색" />
-
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:textStyle="bold"
-            android:textSize="16sp"
-            android:text="전체 삭제" />
-
-    </LinearLayout>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/history_search_layout" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/history_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        tools:listitem="@layout/item_history_summoner"
-        app:layout_constraintTop_toBottomOf="@id/history_info_layout"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/history_current_text"
+        tools:listitem="@layout/item_history_summoner" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

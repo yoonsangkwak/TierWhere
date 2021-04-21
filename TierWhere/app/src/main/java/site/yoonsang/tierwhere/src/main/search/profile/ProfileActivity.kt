@@ -1,5 +1,6 @@
 package site.yoonsang.tierwhere.src.main.search.profile
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.ImageView
@@ -13,6 +14,7 @@ import site.yoonsang.tierwhere.data.DB_NAME
 import site.yoonsang.tierwhere.data.DB_VERSION
 import site.yoonsang.tierwhere.data.HistorySummoner
 import site.yoonsang.tierwhere.databinding.ActivityProfileBinding
+import site.yoonsang.tierwhere.src.main.history.HistoryActivity
 import site.yoonsang.tierwhere.src.main.search.profile.current.CurrentMatchListAdapter
 import site.yoonsang.tierwhere.src.main.search.profile.model.MatchList
 import site.yoonsang.tierwhere.src.main.search.profile.model.SummonerLeague
@@ -27,20 +29,18 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding>(ActivityProfileBind
 
         refreshData()
 
-        binding.profileRefreshLayout.setOnClickListener {
+        binding.profileRefreshButton.setOnClickListener {
             refreshData()
+        }
+
+        binding.profileSearchImage.setOnClickListener {
+            startActivity(Intent(this, HistoryActivity::class.java))
         }
     }
 
     override fun getUserProfileSuccess(response: SummonerLeague) {
-        dismissLoadingDialog()
         binding.profileSummonerNameText.text = intent.getStringExtra("name")
         binding.profileSummonerLevelText.text = intent.getIntExtra("level", 0).toString()
-        val sdf = SimpleDateFormat(
-            "yyyy-MM-dd HH:mm",
-            Locale.KOREA
-        ).format(intent.getLongExtra("date", 0))
-        binding.profileRefreshDateText.text = sdf
         Glide.with(binding.profileIconImage.context)
             .load("http://ddragon.leagueoflegends.com/cdn/10.18.1/img/profileicon/${intent.getIntExtra("icon",0)}.png")
             .into(binding.profileIconImage)
@@ -105,11 +105,11 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding>(ActivityProfileBind
     }
 
     override fun getUserProfileFailure(message: String) {
-        dismissLoadingDialog()
         showCustomToast(message)
     }
 
     override fun getMatchesInfoSuccess(response: MatchList) {
+        dismissLoadingDialog()
         val currentMatchListAdapter =
             CurrentMatchListAdapter(this, intent.getStringExtra("name")!!, response.matchListItems)
         binding.profileRecordRecyclerView.apply {
@@ -119,6 +119,7 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding>(ActivityProfileBind
     }
 
     override fun getMatchesInfoFailure(message: String) {
+        dismissLoadingDialog()
         showCustomToast(message)
     }
 

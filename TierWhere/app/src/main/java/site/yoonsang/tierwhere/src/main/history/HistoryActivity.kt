@@ -38,6 +38,10 @@ class HistoryActivity : BaseActivity<ActivityHistoryBinding>(ActivityHistoryBind
                 binding.historyEditText.text.toString().toLowerCase(Locale.ROOT)
             HistoryService(this).tryGetSummoner(summonerName)
         }
+
+        binding.historyCloseImage.setOnClickListener {
+            binding.historyEditText.setText("")
+        }
     }
 
     override fun onResume() {
@@ -51,7 +55,6 @@ class HistoryActivity : BaseActivity<ActivityHistoryBinding>(ActivityHistoryBind
         intent.putExtra("summonerId", response.id)
         intent.putExtra("accountId", response.accountId)
         intent.putExtra("name", response.name)
-        intent.putExtra("date", response.revisionDate)
         intent.putExtra("level", response.summonerLevel)
         intent.putExtra("icon", response.profileIconId)
         startActivity(intent)
