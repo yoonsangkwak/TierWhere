@@ -5,7 +5,9 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.widget.NestedScrollView
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import site.yoonsang.tierwhere.R
 import site.yoonsang.tierwhere.config.BaseActivity
@@ -17,12 +19,20 @@ import site.yoonsang.tierwhere.databinding.ActivityProfileBinding
 import site.yoonsang.tierwhere.src.main.history.HistoryActivity
 import site.yoonsang.tierwhere.src.main.search.profile.current.CurrentMatchListAdapter
 import site.yoonsang.tierwhere.src.main.search.profile.model.MatchList
+import site.yoonsang.tierwhere.src.main.search.profile.model.MatchListItem
 import site.yoonsang.tierwhere.src.main.search.profile.model.SummonerLeague
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
 class ProfileActivity : BaseActivity<ActivityProfileBinding>(ActivityProfileBinding::inflate),
     ProfileView {
+
+    private var beginIndex = 0
+    private var endIndex = 20
+    private var data = mutableListOf<MatchListItem>()
+    private var tempList = mutableListOf<MatchListItem>()
+    private var allList = listOf<MatchListItem>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,13 +46,29 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding>(ActivityProfileBind
         binding.profileSearchImage.setOnClickListener {
             startActivity(Intent(this, HistoryActivity::class.java))
         }
+
+        binding.profileScrollView.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
+            if (scrollY == (v.getChildAt(0).measuredHeight - v.measuredHeight)) {
+                showLoadingDialog(this)
+                addData(allList, beginIndex, endIndex)
+                binding.profileRecordRecyclerView.adapter?.notifyItemRangeInserted(beginIndex, tempList.size)
+                dismissLoadingDialog()
+            }
+        })
     }
 
     override fun getUserProfileSuccess(response: SummonerLeague) {
         binding.profileSummonerNameText.text = intent.getStringExtra("name")
         binding.profileSummonerLevelText.text = intent.getIntExtra("level", 0).toString()
         Glide.with(binding.profileIconImage.context)
-            .load("http://ddragon.leagueoflegends.com/cdn/11.8.1/img/profileicon/${intent.getIntExtra("icon",0)}.png")
+            .load(
+                "http://ddragon.leagueoflegends.com/cdn/11.8.1/img/profileicon/${
+                    intent.getIntExtra(
+                        "icon",
+                        0
+                    )
+                }.png"
+            )
             .placeholder(R.color.iron)
             .error(R.color.iron)
             .into(binding.profileIconImage)
@@ -54,7 +80,8 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding>(ActivityProfileBind
                         "MASTER",
                         "GRANDMASTER",
                         "CHALLERNGER" -> binding.profileSoloRankTierText.text = item.tier
-                        else -> binding.profileSoloRankTierText.text = "${item.tier} ${convertRank(item.rank)}"
+                        else -> binding.profileSoloRankTierText.text =
+                            "${item.tier} ${convertRank(item.rank)}"
                     }
                     binding.profileSoloRankLpText.text = "${item.leaguePoints} LP"
                     val winRate = (item.wins / (item.wins + item.losses).toFloat() * 100).toInt()
@@ -71,7 +98,8 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding>(ActivityProfileBind
                         "MASTER",
                         "GRANDMASTER",
                         "CHALLERNGER" -> binding.profileFlexRankTierText.text = item.tier
-                        else -> binding.profileFlexRankTierText.text = "${item.tier} ${convertRank(item.rank)}"
+                        else -> binding.profileFlexRankTierText.text =
+                            "${item.tier} ${convertRank(item.rank)}"
                     }
                     binding.profileFlexRankLpText.text = "${item.leaguePoints} LP"
                     val winRate = (item.wins / (item.wins + item.losses).toFloat() * 100).toInt()
@@ -90,7 +118,7 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding>(ActivityProfileBind
         val summonerId = intent.getStringExtra("summonerId")!!
         val name = intent.getStringExtra("name")!!
         var tier = "UNRANKED"
-        var rank= ""
+        var rank = ""
         for (item in response) {
             if (item.queueType == "RANKED_SOLO_5x5") {
                 tier = item.tier
@@ -112,8 +140,14 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding>(ActivityProfileBind
 
     override fun getMatchesInfoSuccess(response: MatchList) {
         dismissLoadingDialog()
+        allList = response.matchListItems
+        addData(allList, beginIndex, endIndex)
         val currentMatchListAdapter =
-            CurrentMatchListAdapter(this, intent.getStringExtra("name")!!, response.matchListItems)
+            CurrentMatchListAdapter(
+                this,
+                intent.getStringExtra("name")!!,
+                data
+            )
         binding.profileRecordRecyclerView.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = currentMatchListAdapter
@@ -198,7 +232,27 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding>(ActivityProfileBind
     private fun getMatch() {
         val accountId = intent.getStringExtra("accountId")
         if (accountId != null) {
-            ProfileService(this).tryGetMatchList(accountId, 0, 10)
+            ProfileService(this).tryGetMatchList(accountId)
+        }
+    }
+
+    private fun addData(list: List<MatchListItem>, begin: Int, end: Int) {
+        if (endIndex < 100) {
+            tempList.clear()
+            if (end < list.size) {
+                for (i in begin until end) {
+                    tempList.add(list[i])
+                }
+                beginIndex += 20
+                endIndex += 20
+            } else {
+                for (i in begin until list.size) {
+                    tempList.add(list[i])
+                }
+            }
+            data.addAll(tempList)
+        } else {
+            showCustomToast("마지막 전적입니다")
         }
     }
 }

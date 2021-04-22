@@ -93,20 +93,24 @@ class SearchFragment :
         Glide.with(binding.searchFavoriteTierImage.context)
             .load(R.drawable.unranked)
             .into(binding.searchFavoriteTierImage)
-        if (response.size > 0) {
-            if (response[0].queueType == "RANKED_SOLO_5x5") {
-                when (response[0].tier) {
+        for (item in response) {
+            if (item.queueType == "RANKED_SOLO_5x5") {
+                when (item.tier) {
                     "MASTER",
                     "GRANDMASTER",
-                    "CHALLERNGER" -> binding.searchFavoriteTierText.text = response[0].tier
+                    "CHALLERNGER" -> binding.searchFavoriteTierText.text = item.tier
                     else -> binding.searchFavoriteTierText.text =
-                        "${response[0].tier} ${convertRank(response[0].rank)}"
+                        "${item.tier} ${convertRank(item.rank)}"
                 }
-                setTier(binding.searchFavoriteTierImage, binding.searchFavoriteTierText, response[0].tier)
-                binding.searchFavoriteLpText.text = "${response[0].leaguePoints} LP"
-                val winRate = (response[0].wins / (response[0].wins + response[0].losses).toFloat() * 100).toInt()
+                setTier(
+                    binding.searchFavoriteTierImage,
+                    binding.searchFavoriteTierText,
+                    item.tier
+                )
+                binding.searchFavoriteLpText.text = "${item.leaguePoints} LP"
+                val winRate = (item.wins / (item.wins + item.losses).toFloat() * 100).toInt()
                 binding.searchFavoriteWinRateText.text =
-                    "${response[0].wins}승 ${response[0].losses}패 (${winRate}%)"
+                    "${item.wins}승 ${item.losses}패 (${winRate}%)"
             }
         }
     }

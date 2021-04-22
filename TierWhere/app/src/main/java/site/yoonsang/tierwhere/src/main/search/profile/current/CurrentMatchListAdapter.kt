@@ -26,7 +26,7 @@ import java.io.InputStreamReader
 class CurrentMatchListAdapter(
     val context: Context,
     private val summonerName: String,
-    private val data: List<MatchListItem>
+    private val data: MutableList<MatchListItem>
 ) : RecyclerView.Adapter<CurrentMatchListAdapter.ViewHolder>(), DetailMatchInfoView {
 
     private val inflater =
