@@ -1,9 +1,6 @@
 package site.yoonsang.tierwhere.src.main.search.profile.current
 
 import android.content.Context
-import android.content.res.AssetManager
-import android.graphics.Color
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,18 +13,16 @@ import org.json.JSONObject
 import site.yoonsang.tierwhere.R
 import site.yoonsang.tierwhere.databinding.ItemCurrentMatchBinding
 import site.yoonsang.tierwhere.src.main.search.profile.ProfileActivity
-import site.yoonsang.tierwhere.src.main.search.profile.ProfileService
 import site.yoonsang.tierwhere.src.main.search.profile.current.model.DetailMatchInfo
 import site.yoonsang.tierwhere.src.main.search.profile.model.MatchListItem
 import java.io.BufferedReader
-import java.io.InputStream
 import java.io.InputStreamReader
 
 class CurrentMatchListAdapter(
     val context: Context,
     private val summonerName: String,
     private val data: MutableList<MatchListItem>
-) : RecyclerView.Adapter<CurrentMatchListAdapter.ViewHolder>(), DetailMatchInfoView {
+) : RecyclerView.Adapter<CurrentMatchListAdapter.ViewHolder>(), MatchInfoView {
 
     private val inflater =
         context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
@@ -64,7 +59,7 @@ class CurrentMatchListAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        DetailMatchInfoService(this).tryGetDetailMatchInfo(data[position].gameId, holder)
+        MatchInfoService(this).tryGetDetailMatchInfo(data[position].gameId, holder)
     }
 
     override fun getItemCount(): Int = data.size

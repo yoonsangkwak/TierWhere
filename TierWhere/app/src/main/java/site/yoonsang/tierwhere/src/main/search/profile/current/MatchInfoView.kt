@@ -2,7 +2,7 @@ package site.yoonsang.tierwhere.src.main.search.profile.current
 
 import site.yoonsang.tierwhere.src.main.search.profile.current.model.DetailMatchInfo
 
-interface DetailMatchInfoView {
+interface MatchInfoView {
 
     fun getDetailMatchInfoSuccess(response: DetailMatchInfo, holder: CurrentMatchListAdapter.ViewHolder)
 

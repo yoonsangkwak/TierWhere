@@ -15,10 +15,17 @@ import site.yoonsang.tierwhere.src.main.history.HistoryActivity
 import site.yoonsang.tierwhere.src.main.search.favorite.FavoriteActivity
 import site.yoonsang.tierwhere.src.main.search.model.SearchSummoner
 import site.yoonsang.tierwhere.src.main.search.model.SearchSummonerLeague
+import site.yoonsang.tierwhere.src.main.search.profile.ProfileActivity
 
 class SearchFragment :
     BaseFragment<FragmentSearchBinding>(FragmentSearchBinding::bind, R.layout.fragment_search),
     SearchView {
+
+    private var summonerId: String = ""
+    private var accountId: String = ""
+    private var name: String = ""
+    private var level: Int = 0
+    private var icon: Int = 0
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -46,6 +53,16 @@ class SearchFragment :
             )
             binding.searchFavoriteAbsentLayout.visibility = View.GONE
             binding.searchFavoriteLayout.visibility = View.VISIBLE
+        }
+
+        binding.searchFavoriteLayout.setOnClickListener {
+            val intent = Intent(activity, ProfileActivity::class.java)
+            intent.putExtra("summonerId", summonerId)
+            intent.putExtra("accountId", accountId)
+            intent.putExtra("name", name)
+            intent.putExtra("level", level)
+            intent.putExtra("icon", icon)
+            startActivity(intent)
         }
 
         binding.searchFavoriteDelete.setOnClickListener {
@@ -121,6 +138,11 @@ class SearchFragment :
     }
 
     override fun getSummonerSuccess(response: SearchSummoner) {
+        summonerId = response.id
+        accountId = response.accountId
+        name = response.name
+        level = response.summonerLevel
+        icon = response.profileIconId
         SearchService(this).tryGetSummonerLeague(response.id)
         binding.searchFavoriteSummonerNameText.text = response.name
         Glide.with(binding.searchFavoriteProfileIconImage.context)

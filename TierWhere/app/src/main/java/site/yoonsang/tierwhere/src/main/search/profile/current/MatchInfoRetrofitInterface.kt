@@ -5,7 +5,7 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 import site.yoonsang.tierwhere.src.main.search.profile.current.model.DetailMatchInfo
 
-interface DetailMatchInfoRetrofitInterface {
+interface MatchInfoRetrofitInterface {
 
     @GET("/lol/match/v4/matches/{matchId}")
     fun getDetailMatchInfo(

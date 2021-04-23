@@ -6,11 +6,11 @@ import retrofit2.Response
 import site.yoonsang.tierwhere.config.ApplicationClass
 import site.yoonsang.tierwhere.src.main.search.profile.current.model.DetailMatchInfo
 
-class DetailMatchInfoService(val view: DetailMatchInfoView) {
+class MatchInfoService(val view: MatchInfoView) {
 
     fun tryGetDetailMatchInfo(matchId: Long, holder: CurrentMatchListAdapter.ViewHolder) {
         val detailMatchInfoRetrofitInterface =
-            ApplicationClass.sRetrofit.create(DetailMatchInfoRetrofitInterface::class.java)
+            ApplicationClass.sRetrofit.create(MatchInfoRetrofitInterface::class.java)
         detailMatchInfoRetrofitInterface.getDetailMatchInfo(matchId)
             .enqueue(object : Callback<DetailMatchInfo> {
                 override fun onResponse(
