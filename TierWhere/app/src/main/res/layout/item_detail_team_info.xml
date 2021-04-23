@@ -14,6 +14,7 @@
         android:layout_height="40dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         tools:src="@color/main_one" />
 
     <TextView
@@ -75,14 +76,14 @@
         android:id="@+id/item_team_tier_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:minWidth="20dp"
-        android:gravity="center"
         android:layout_marginStart="5dp"
+        android:background="@color/unranked"
+        android:gravity="center"
+        android:minWidth="20dp"
         android:paddingHorizontal="2dp"
+        android:text="-"
         android:textColor="@color/white"
         android:textSize="12sp"
-        android:text="-"
-        android:background="@color/unranked"
         app:layout_constraintBottom_toTopOf="@id/item_team_kda_layout"
         app:layout_constraintStart_toEndOf="@id/item_team_rune_main"
         app:layout_constraintTop_toTopOf="parent" />
@@ -91,8 +92,10 @@
         android:id="@+id/item_team_summoner_name_text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="2dp"
+        android:layout_marginStart="5dp"
+        android:fontFamily="@font/infsans"
         android:textColor="@color/black"
+        android:textSize="12sp"
         app:layout_constraintBottom_toTopOf="@id/item_team_kda_layout"
         app:layout_constraintEnd_toStartOf="@id/item_item_layout"
         app:layout_constraintStart_toEndOf="@id/item_team_tier_text"
@@ -115,13 +118,15 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:textColor="@color/black"
+            android:textSize="12sp"
             tools:text="11" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="/" />
+            android:text="/"
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/item_team_death_text"
@@ -129,13 +134,15 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:textColor="#FF0000"
+            android:textSize="12sp"
             tools:text="12" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="/" />
+            android:text="/"
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/item_team_assist_text"
@@ -143,6 +150,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:textColor="@color/black"
+            android:textSize="12sp"
             tools:text="13" />
     </LinearLayout>
 
@@ -160,13 +168,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
+            android:textSize="12sp"
             tools:text="203" />
 
         <TextView
             android:id="@+id/item_team_cs_per_min_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="2dp"
+            android:layout_marginStart="3dp"
+            android:textSize="12sp"
             tools:text="(7.4)" />
     </LinearLayout>
 
@@ -236,6 +246,7 @@
         android:layout_width="0dp"
         android:layout_height="20dp"
         android:layout_marginTop="5dp"
+        android:layout_marginHorizontal="1dp"
         android:progressDrawable="@drawable/custom_progressbar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/item_item_layout"
@@ -247,6 +258,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/black"
+        android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@id/item_team_damage_progress"
         app:layout_constraintEnd_toEndOf="@id/item_team_damage_progress"
         app:layout_constraintStart_toStartOf="@id/item_team_damage_progress"

@@ -67,6 +67,23 @@
                     android:layout_weight="1" />
 
                 <TextView
+                    android:id="@+id/detail_match_date_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textColor="@color/white"
+                    tools:text="몇 분전" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="5dp"
+                    android:layout_gravity="center"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:text="·" />
+
+                <TextView
                     android:id="@+id/detail_match_play_time_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -87,11 +104,11 @@
                     android:id="@+id/detail_blue_team_win_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="10dp"
                     android:layout_gravity="center"
-                    android:textStyle="bold"
-                    android:textSize="18sp"
+                    android:layout_marginEnd="10dp"
                     android:fontFamily="@font/kotrabold"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
                     tools:text="승리" />
 
                 <TextView
@@ -110,18 +127,18 @@
                     android:id="@+id/detail_blue_dragon_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="10dp"
                     android:layout_gravity="center"
-                    android:textStyle="bold"
+                    android:layout_marginEnd="5dp"
+                    android:textSize="12sp"
                     tools:text="드래곤 1" />
 
                 <TextView
                     android:id="@+id/detail_blue_baron_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="10dp"
                     android:layout_gravity="center"
-                    android:textStyle="bold"
+                    android:layout_marginEnd="5dp"
+                    android:textSize="12sp"
                     tools:text="바론 1" />
 
                 <TextView
@@ -129,7 +146,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:textStyle="bold"
+                    android:textSize="12sp"
                     tools:text="타워 1" />
             </LinearLayout>
 
@@ -138,7 +155,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 tools:itemCount="5"
-                tools:listitem="@layout/item_detail_team_info"/>
+                tools:listitem="@layout/item_detail_team_info" />
 
             <LinearLayout
                 android:id="@+id/detail_red_team_layout"
@@ -151,11 +168,11 @@
                     android:id="@+id/detail_red_team_win_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="10dp"
                     android:layout_gravity="center"
-                    android:textStyle="bold"
-                    android:textSize="18sp"
+                    android:layout_marginEnd="10dp"
                     android:fontFamily="@font/kotrabold"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
                     tools:text="패배" />
 
                 <TextView
@@ -174,18 +191,18 @@
                     android:id="@+id/detail_red_dragon_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="10dp"
                     android:layout_gravity="center"
-                    android:textStyle="bold"
+                    android:layout_marginEnd="5dp"
+                    android:textSize="12sp"
                     tools:text="드래곤 1" />
 
                 <TextView
                     android:id="@+id/detail_red_baron_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="10dp"
                     android:layout_gravity="center"
-                    android:textStyle="bold"
+                    android:layout_marginEnd="5dp"
+                    android:textSize="12sp"
                     tools:text="바론 1" />
 
                 <TextView
@@ -193,7 +210,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:textStyle="bold"
+                    android:textSize="12sp"
                     tools:text="타워 1" />
             </LinearLayout>
 
@@ -202,7 +219,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 tools:itemCount="5"
-                tools:listitem="@layout/item_detail_team_info"/>
+                tools:listitem="@layout/item_detail_team_info" />
 
 
         </LinearLayout>

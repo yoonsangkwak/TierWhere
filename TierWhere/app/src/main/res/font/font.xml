@@ -3,4 +3,6 @@
 
     <font
         android:font="@font/kotrabold" />
+    <font
+        android:font="@font/infsans" />
 </font-family>

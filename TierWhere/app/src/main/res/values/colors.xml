@@ -31,4 +31,5 @@
     <color name="item_blank">#3E3E3E</color>
     <color name="gubun">#F2F8FA</color>
     <color name="my_background">#EFFFFE</color>
+    <color name="damage_graph">#FE5A5F</color>
 </resources>

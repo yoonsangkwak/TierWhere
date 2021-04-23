@@ -80,7 +80,9 @@ class CurrentMatchListAdapter(
             else -> "사용자 설정 게임"
         }
         holder.date.text = calculateDate(response.gameCreation)
-        holder.playTime.text = "${response.gameDuration / 60}:${response.gameDuration % 60}"
+        val min = response.gameDuration / 60
+        val sec = String.format("%02d", response.gameDuration % 60)
+        holder.playTime.text = "$min:$sec"
         var participantId = 0
         for (user in response.participantIdentities) {
             if (user.player.summonerName == summonerName) {

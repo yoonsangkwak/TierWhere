@@ -39,7 +39,10 @@ class DetailMatchActivity :
             1020 -> "단일 모드"
             else -> "사용자 설정 게임"
         }
-        binding.detailMatchPlayTimeText.text = "${response.gameDuration / 60}:${response.gameDuration % 60}"
+        val min = response.gameDuration / 60
+        val sec = String.format("%02d", response.gameDuration % 60)
+        binding.detailMatchPlayTimeText.text = "$min:$sec"
+        binding.detailMatchDateText.text = calculateDate(response.gameCreation)
         for (team in response.teams) {
             if (team.teamId == 100) {
                 if (team.win == "Win") {
@@ -77,22 +80,47 @@ class DetailMatchActivity :
                 if (summoner.participantId == player.participantId) redSummoner.add(summoner)
             }
         }
-        val maxDamage = response.participants.maxOf {
-            it.stats.totalDamageDealtToChampions
-        }
+        val maxDamage = response.participants.maxOf { it.stats.totalDamageDealtToChampions }
         val summonerName = intent.getStringExtra("name")!!
         binding.detailBlueTeamRecyclerView.apply {
             layoutManager = LinearLayoutManager(context)
-            adapter = BlueTeamAdapter(context, bluePlayer, blueSummoner, response.gameDuration, summonerName, maxDamage)
+            adapter = BlueTeamAdapter(
+                context,
+                bluePlayer,
+                blueSummoner,
+                response.gameDuration,
+                summonerName,
+                maxDamage
+            )
         }
         binding.detailRedTeamRecyclerView.apply {
             layoutManager = LinearLayoutManager(context)
-            adapter = RedTeamAdapter(context, redPlayer, redSummoner, response.gameDuration, summonerName, maxDamage)
+            adapter = RedTeamAdapter(
+                context,
+                redPlayer,
+                redSummoner,
+                response.gameDuration,
+                summonerName,
+                maxDamage
+            )
         }
     }
 
     override fun getDetailMatchInfoFailure(message: String) {
         dismissLoadingDialog()
         showCustomToast(message)
+    }
+
+    private fun calculateDate(gameDate: Long): String {
+        val currentTime = System.currentTimeMillis()
+        val diffTime = (currentTime - gameDate) / 1000
+        return when {
+            diffTime < 60 -> "방금 전"
+            (diffTime / 60) < 60 -> "${diffTime / 60}분 전"
+            (diffTime / 60 / 60) < 24 -> "${diffTime / 60 / 60}시간 전"
+            (diffTime / 60 / 60 / 24) < 30 -> "${diffTime / 60 / 60 / 24}일 전"
+            (diffTime / 60 / 60 / 24 / 30) < 12 -> "${diffTime / 60 / 60 / 24 / 30}달 전"
+            else -> "${diffTime / 60 / 60 / 24 / 30 / 12}년 전"
+        }
     }
 }
