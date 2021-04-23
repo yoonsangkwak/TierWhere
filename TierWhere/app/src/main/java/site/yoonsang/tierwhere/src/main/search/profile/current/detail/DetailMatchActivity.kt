@@ -77,14 +77,17 @@ class DetailMatchActivity :
                 if (summoner.participantId == player.participantId) redSummoner.add(summoner)
             }
         }
+        val maxDamage = response.participants.maxOf {
+            it.stats.totalDamageDealtToChampions
+        }
         val summonerName = intent.getStringExtra("name")!!
         binding.detailBlueTeamRecyclerView.apply {
             layoutManager = LinearLayoutManager(context)
-            adapter = BlueTeamAdapter(context, bluePlayer, blueSummoner, response.gameDuration, summonerName)
+            adapter = BlueTeamAdapter(context, bluePlayer, blueSummoner, response.gameDuration, summonerName, maxDamage)
         }
         binding.detailRedTeamRecyclerView.apply {
             layoutManager = LinearLayoutManager(context)
-            adapter = RedTeamAdapter(context, redPlayer, redSummoner, response.gameDuration, summonerName)
+            adapter = RedTeamAdapter(context, redPlayer, redSummoner, response.gameDuration, summonerName, maxDamage)
         }
     }
 

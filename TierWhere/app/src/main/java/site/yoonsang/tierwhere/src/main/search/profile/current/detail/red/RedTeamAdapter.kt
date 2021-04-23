@@ -26,15 +26,13 @@ class RedTeamAdapter(
     private val player: MutableList<Participant>,
     private val summoner: MutableList<ParticipantIdentity>,
     private val playTime: Int,
-    private val summonerName: String
+    private val summonerName: String,
+    private val maxDamage: Int
 ) : RecyclerView.Adapter<RedTeamAdapter.ViewHolder>(), RedTeamView {
 
     private val inflater =
         context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
     private lateinit var binding: ItemDetailTeamInfoBinding
-    private val maxDamage = player.maxOf {
-        it.stats.totalDamageDealtToChampions
-    }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val myBackground = binding.itemTeamBackground
@@ -240,10 +238,6 @@ class RedTeamAdapter(
             "CHALLENGER" -> {
                 textView.text = "C"
                 textView.setBackgroundColor(context.getColor(R.color.challenger))
-            }
-            else -> {
-                textView.text = "-"
-                textView.setBackgroundColor(context.getColor(R.color.item_blank))
             }
         }
 

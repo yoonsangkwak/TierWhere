@@ -75,15 +75,17 @@
         android:id="@+id/item_team_tier_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:minWidth="20dp"
+        android:gravity="center"
         android:layout_marginStart="5dp"
         android:paddingHorizontal="2dp"
         android:textColor="@color/white"
         android:textSize="12sp"
+        android:text="-"
+        android:background="@color/unranked"
         app:layout_constraintBottom_toTopOf="@id/item_team_kda_layout"
         app:layout_constraintStart_toEndOf="@id/item_team_rune_main"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:background="@color/gold"
-        tools:text="G4" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/item_team_summoner_name_text"
