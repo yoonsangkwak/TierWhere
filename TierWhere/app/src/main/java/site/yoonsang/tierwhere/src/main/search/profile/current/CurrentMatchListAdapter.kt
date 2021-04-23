@@ -1,6 +1,7 @@
 package site.yoonsang.tierwhere.src.main.search.profile.current
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +14,7 @@ import org.json.JSONObject
 import site.yoonsang.tierwhere.R
 import site.yoonsang.tierwhere.databinding.ItemCurrentMatchBinding
 import site.yoonsang.tierwhere.src.main.search.profile.ProfileActivity
+import site.yoonsang.tierwhere.src.main.search.profile.current.detail.DetailMatchActivity
 import site.yoonsang.tierwhere.src.main.search.profile.current.model.DetailMatchInfo
 import site.yoonsang.tierwhere.src.main.search.profile.model.MatchListItem
 import java.io.BufferedReader
@@ -120,11 +122,14 @@ class CurrentMatchListAdapter(
         setItemImage(holder.itemFour, response.participants[participantId - 1].stats.item3)
         setItemImage(holder.itemFive, response.participants[participantId - 1].stats.item4)
         setItemImage(holder.itemSix, response.participants[participantId - 1].stats.item5)
-        Glide.with(holder.wad.context)
-            .load("https://ddragon.leagueoflegends.com/cdn/11.8.1/img/item/${response.participants[participantId - 1].stats.item6}.png")
-            .placeholder(R.color.iron)
-            .error(R.color.iron)
-            .into(holder.wad)
+        setWadImage(holder.wad, response.participants[participantId - 1].stats.item6)
+
+        holder.itemView.setOnClickListener {
+            val intent = Intent(context, DetailMatchActivity::class.java)
+            intent.putExtra("matchId", response.gameId)
+            intent.putExtra("name", response.participantIdentities[participantId - 1].player.summonerName)
+            context.startActivity(intent)
+        }
     }
 
     override fun getDetailMatchInfoFailure(message: String) {
@@ -145,13 +150,19 @@ class CurrentMatchListAdapter(
     }
 
     private fun setItemImage(imageView: ImageView, itemId: Int) {
-        if (itemId != 0) {
-            Glide.with(imageView.context)
-                .load("https://ddragon.leagueoflegends.com/cdn/11.8.1/img/item/${itemId}.png")
-                .placeholder(R.color.iron)
-                .error(R.color.iron)
-                .into(imageView)
-        }
+        Glide.with(imageView.context)
+            .load("https://ddragon.leagueoflegends.com/cdn/11.8.1/img/item/${itemId}.png")
+            .placeholder(R.color.item_blank)
+            .error(R.color.item_blank)
+            .into(imageView)
+    }
+
+    private fun setWadImage(imageView: CircleImageView, itemId: Int) {
+        Glide.with(imageView.context)
+            .load("https://ddragon.leagueoflegends.com/cdn/11.8.1/img/item/${itemId}.png")
+            .placeholder(R.color.item_blank)
+            .error(R.color.item_blank)
+            .into(imageView)
     }
 
     private fun setSpellImage(imageView: ImageView, id: Int) {
