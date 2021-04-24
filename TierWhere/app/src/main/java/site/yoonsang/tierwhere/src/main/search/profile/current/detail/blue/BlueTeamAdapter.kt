@@ -1,6 +1,7 @@
 package site.yoonsang.tierwhere.src.main.search.profile.current.detail.blue
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +14,8 @@ import de.hdodenhof.circleimageview.CircleImageView
 import org.json.JSONObject
 import site.yoonsang.tierwhere.R
 import site.yoonsang.tierwhere.databinding.ItemDetailTeamInfoBinding
+import site.yoonsang.tierwhere.src.main.search.profile.ProfileActivity
+import site.yoonsang.tierwhere.src.main.search.profile.current.detail.blue.model.BlueSummoner
 import site.yoonsang.tierwhere.src.main.search.profile.current.detail.blue.model.BlueSummonerTier
 import site.yoonsang.tierwhere.src.main.search.profile.current.detail.model.Participant
 import site.yoonsang.tierwhere.src.main.search.profile.current.detail.model.ParticipantIdentity
@@ -89,6 +92,10 @@ class BlueTeamAdapter(
         setTotalDamage(holder.damageGraph, holder.damage, player[position].stats.totalDamageDealtToChampions)
         if (summoner[position].player.summonerName == summonerName) {
             holder.myBackground.setBackgroundColor(context.getColor(R.color.my_background))
+        }
+        holder.name.setOnClickListener {
+            val summonerName = summoner[position].player.summonerName
+            BlueTeamService(this).tryGetSummoner(summonerName)
         }
     }
 
@@ -252,5 +259,18 @@ class BlueTeamAdapter(
     }
 
     override fun getSummonerTierFailure(message: String) {
+    }
+
+    override fun getSummonerSuccess(response: BlueSummoner) {
+        val intent = Intent(context, ProfileActivity::class.java)
+        intent.putExtra("summonerId", response.id)
+        intent.putExtra("accountId", response.accountId)
+        intent.putExtra("name", response.name)
+        intent.putExtra("level", response.summonerLevel)
+        intent.putExtra("icon", response.profileIconId)
+        context.startActivity(intent)
+    }
+
+    override fun getSummonerFailure(message: String) {
     }
 }

@@ -1,6 +1,7 @@
 package site.yoonsang.tierwhere.src.main.rank.summoner
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,7 @@ import site.yoonsang.tierwhere.R
 import site.yoonsang.tierwhere.databinding.ItemRankSummonerBinding
 import site.yoonsang.tierwhere.src.main.rank.model.Entry
 import site.yoonsang.tierwhere.src.main.rank.summoner.model.RankSummoner
+import site.yoonsang.tierwhere.src.main.search.profile.ProfileActivity
 
 class RankSummonerAdapter(
     val context: Context,
@@ -53,6 +55,16 @@ class RankSummonerAdapter(
         Glide.with(holder.profileIcon.context)
             .load("http://ddragon.leagueoflegends.com/cdn/11.8.1/img/profileicon/${response.profileIconId}.png")
             .into(holder.profileIcon)
+
+        holder.summonerName.setOnClickListener {
+            val intent = Intent(context, ProfileActivity::class.java)
+            intent.putExtra("summonerId", response.id)
+            intent.putExtra("accountId", response.accountId)
+            intent.putExtra("name", response.name)
+            intent.putExtra("level", response.summonerLevel)
+            intent.putExtra("icon", response.profileIconId)
+            context.startActivity(intent)
+        }
     }
 
     override fun getProfileIconFailure(message: String) {
