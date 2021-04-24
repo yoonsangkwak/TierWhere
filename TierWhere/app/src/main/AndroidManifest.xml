@@ -13,7 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PersonalApp">
-        <activity android:name=".src.main.search.profile.current.detail.DetailMatchActivity"></activity>
+        <activity android:name=".src.main.search.profile.analysis.AnalysisActivity"></activity>
+        <activity android:name=".src.main.search.profile.current.detail.DetailMatchActivity" />
         <activity android:name=".src.main.search.favorite.FavoriteActivity" />
         <activity android:name=".src.main.history.HistoryActivity" />
         <activity android:name=".src.main.search.profile.ProfileActivity" />

@@ -17,6 +17,7 @@ import site.yoonsang.tierwhere.data.DB_VERSION
 import site.yoonsang.tierwhere.data.HistorySummoner
 import site.yoonsang.tierwhere.databinding.ActivityProfileBinding
 import site.yoonsang.tierwhere.src.main.history.HistoryActivity
+import site.yoonsang.tierwhere.src.main.search.profile.analysis.AnalysisActivity
 import site.yoonsang.tierwhere.src.main.search.profile.current.CurrentMatchListAdapter
 import site.yoonsang.tierwhere.src.main.search.profile.model.MatchList
 import site.yoonsang.tierwhere.src.main.search.profile.model.MatchListItem
@@ -47,7 +48,7 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding>(ActivityProfileBind
             startActivity(Intent(this, HistoryActivity::class.java))
         }
 
-        binding.profileScrollView.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
+        binding.profileScrollView.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { v, _, scrollY, _, _ ->
             if (scrollY == (v.getChildAt(0).measuredHeight - v.measuredHeight)) {
                 showLoadingDialog(this)
                 addData(allList, beginIndex, endIndex)
@@ -55,6 +56,17 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding>(ActivityProfileBind
                 dismissLoadingDialog()
             }
         })
+
+        binding.profileAnalyzeButton.setOnClickListener {
+            val name = intent.getStringExtra("name")!!
+            val accountId = intent.getStringExtra("accountId")!!
+            val summonerId = intent.getStringExtra("summonerId")!!
+            val intent = Intent(this, AnalysisActivity::class.java)
+            intent.putExtra("name", name)
+            intent.putExtra("accountId", accountId)
+            intent.putExtra("summonerId", summonerId)
+            startActivity(intent)
+        }
     }
 
     override fun getUserProfileSuccess(response: SummonerLeague) {

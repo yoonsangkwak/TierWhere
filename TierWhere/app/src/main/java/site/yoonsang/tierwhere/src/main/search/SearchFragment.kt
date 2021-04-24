@@ -96,6 +96,11 @@ class SearchFragment :
                         .placeholder(R.color.iron)
                         .error(R.color.iron)
                         .into(binding.searchFavoriteProfileIconImage)
+                    summonerId = data.getStringExtra("summonerId")!!
+                    accountId = data.getStringExtra("accountId")!!
+                    name = data.getStringExtra("name")!!
+                    level = data.getIntExtra("profileIcon", 0)
+                    icon = data.getIntExtra("icon", 0)
                 }
             }
         }

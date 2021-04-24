@@ -32,4 +32,6 @@
     <color name="gubun">#F2F8FA</color>
     <color name="my_background">#EFFFFE</color>
     <color name="damage_graph">#FE5A5F</color>
+    <color name="death">#FF0000</color>
+    <color name="mastery_border">#A88130</color>
 </resources>
