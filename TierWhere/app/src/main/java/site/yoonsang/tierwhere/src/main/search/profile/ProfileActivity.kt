@@ -34,6 +34,14 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding>(ActivityProfileBind
     private var data = mutableListOf<MatchListItem>()
     private var tempList = mutableListOf<MatchListItem>()
     private var allList = listOf<MatchListItem>()
+    var game = 0
+    var win = 0
+    var lost = 0
+    var kill = 0
+    var death = 0
+    var assist = 0
+    var cs = 0
+    var playTime = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,6 +73,14 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding>(ActivityProfileBind
             intent.putExtra("name", name)
             intent.putExtra("accountId", accountId)
             intent.putExtra("summonerId", summonerId)
+            intent.putExtra("game", game)
+            intent.putExtra("win", win)
+            intent.putExtra("lost", lost)
+            intent.putExtra("kill", kill)
+            intent.putExtra("death", death)
+            intent.putExtra("assist", assist)
+            intent.putExtra("cs", cs)
+            intent.putExtra("playTime", playTime)
             startActivity(intent)
         }
     }

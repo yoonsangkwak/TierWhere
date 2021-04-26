@@ -132,6 +132,7 @@ class CurrentMatchListAdapter(
             intent.putExtra("name", response.participantIdentities[participantId - 1].player.summonerName)
             context.startActivity(intent)
         }
+        analyzeCurrentMatches(response, participantId)
     }
 
     override fun getDetailMatchInfoFailure(message: String) {
@@ -268,6 +269,19 @@ class CurrentMatchListAdapter(
                 textView.visibility = View.VISIBLE
             }
             else -> textView.visibility = View.GONE
+        }
+    }
+
+    private fun analyzeCurrentMatches(response: DetailMatchInfo, id: Int) {
+        if ((context as ProfileActivity).game < 20) {
+            context.game++
+            if (response.participants[id - 1].stats.win) context.win++
+            else context.lost++
+            context.playTime += response.gameDuration
+            context.kill += response.participants[id - 1].stats.kills
+            context.death += response.participants[id - 1].stats.deaths
+            context.assist += response.participants[id - 1].stats.assists
+            context.cs += response.participants[id - 1].stats.totalMinionsKilled
         }
     }
 }

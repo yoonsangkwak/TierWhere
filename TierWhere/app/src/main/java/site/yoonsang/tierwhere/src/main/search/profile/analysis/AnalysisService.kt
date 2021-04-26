@@ -9,7 +9,7 @@ import site.yoonsang.tierwhere.src.main.search.profile.analysis.model.CurrentMat
 
 class AnalysisService(val view: AnalysisView) {
 
-    fun tryGetCurrentMatches(accountId: String, endIndex:Int?=20, beginIndex:Int?=0) {
+    fun tryGetCurrentMatches(accountId: String, endIndex:Int?=21, beginIndex:Int?=0) {
         val analysisRetrofitInterface = ApplicationClass.sRetrofit.create(AnalysisRetrofitInterface::class.java)
         analysisRetrofitInterface.getMatchList(accountId, endIndex, beginIndex).enqueue(object : Callback<CurrentMatches> {
             override fun onResponse(
