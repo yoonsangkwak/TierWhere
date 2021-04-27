@@ -83,7 +83,7 @@ class CurrentMatchListAdapter(
         val min = response.gameDuration / 60
         val sec = String.format("%02d", response.gameDuration % 60)
         holder.playTime.text = "$min:$sec"
-        var participantId = 0
+        var participantId = 1
         for (user in response.participantIdentities) {
             if (user.player.summonerName == summonerName) {
                 participantId = user.participantId

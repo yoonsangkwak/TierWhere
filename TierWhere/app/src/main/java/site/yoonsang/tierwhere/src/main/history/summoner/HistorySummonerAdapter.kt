@@ -49,8 +49,10 @@ class HistorySummonerAdapter(
             else -> holder.tier.text = "${data[position].tier} ${data[position].rank}"
         }
         holder.delete.setOnClickListener {
+            (context as HistoryActivity).showLoadingDialog(context)
             dbHelper.deleteHistorySummoner(data[position])
             notifyItemRemoved(position)
+            context.dismissLoadingDialog()
         }
         holder.itemView.setOnClickListener {
             (context as HistoryActivity).showLoadingDialog(context)

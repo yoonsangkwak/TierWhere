@@ -4,5 +4,5 @@
     <font
         android:font="@font/kotrabold" />
     <font
-        android:font="@font/infsans" />
+        android:font="@font/eland" />
 </font-family>

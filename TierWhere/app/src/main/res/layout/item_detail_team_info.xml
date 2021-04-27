@@ -93,7 +93,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
-        android:fontFamily="@font/infsans"
+        android:fontFamily="@font/eland"
         android:textColor="@color/black"
         android:textSize="12sp"
         app:layout_constraintBottom_toTopOf="@id/item_team_kda_layout"

@@ -63,7 +63,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="5dp"
-                    android:fontFamily="@font/infsans"
+                    android:fontFamily="@font/eland"
                     android:textColor="@color/black"
                     android:textSize="24sp"
                     android:textStyle="bold"
@@ -433,7 +433,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:fontFamily="@font/infsans"
+                        android:fontFamily="@font/eland"
                         android:textColor="@color/black"
                         tools:text="123,456" />
 
@@ -478,7 +478,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:fontFamily="@font/infsans"
+                        android:fontFamily="@font/eland"
                         android:textColor="@color/black"
                         tools:text="123,456" />
 
@@ -523,7 +523,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:fontFamily="@font/infsans"
+                        android:fontFamily="@font/eland"
                         android:textColor="@color/black"
                         tools:text="123,456" />
 
